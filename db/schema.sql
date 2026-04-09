@@ -28,3 +28,23 @@ CREATE TABLE flashcard (
         ON DELETE CASCADE
 );
 
+CREATE TABLE user_answers (
+    User_ID INT NOT NULL,
+    Card_ID INT NOT NULL,
+    Times_answered INT DEFAULT 0 NOT NULL,
+    Times_skipped INT DEFAULT 0 NOT NULL,
+    Date_last_answered DATE,
+    PRIMARY KEY (User_ID, Card_ID),
+
+    CONSTRAINT fk_answer_user_id
+        FOREIGN KEY (User_ID)
+        REFERENCES user(User_ID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    
+    CONSTRAINT fk_answer_card_id
+        FOREIGN KEY (Card_ID)
+        REFERENCES flashcard(Card_ID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
