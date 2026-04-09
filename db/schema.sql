@@ -10,15 +10,16 @@ CREATE TABLE user (
     Role VARCHAR(30),
     District VARCHAR(30),
     Locale VARCHAR(10),
-    Score INT,
+    Score INT DEFAULT 0,
     Admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE flashcard (
-    User_ID INT PRIMARY KEY NOT NULL,
+    Card_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    User_ID INT NOT NULL,
     Front VARCHAR(300) NOT NULL,
     Back VARCHAR(300) NOT NULL,
-    Points INT NOT NULL
+    Points INT NOT NULL,
 
     CONSTRAINT fk_user_id
         FOREIGN KEY (User_ID)

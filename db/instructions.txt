@@ -1,0 +1,7 @@
+Instructions for creating the database with xampp's PHPMyAdmin:
+
+1. Log in to MyAdmin and create the database named "flashcard_app"
+2. Select the database
+3. Select the import tab at the top
+4. Import schema.sql with default settings
+5. Then import data.sql, but make sure to disable foreign key checks
