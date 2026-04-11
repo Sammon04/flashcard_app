@@ -1,0 +1,10 @@
+/*Variables*/
+:root {
+  /*Just Testing*/
+  --primary-color: grey;
+}
+
+/*Just Testing*/
+body {
+  background-color: var(--primary-color);
+}
