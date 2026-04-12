@@ -1,4 +1,4 @@
-how to test login:
+Login user:
 
 to login, you will POST to localhost/login.php (or wherever you have it)
 you can test it using curl or postman, idk how it works with react yet, but sending json should be easy
@@ -12,9 +12,25 @@ example request with curl:
 curl -X POST http://localhost/login.php -H "Content-Type: application/json" -d {"id":"102","password":"testpass"}
 
 
-how to test registration:
+Register user:
 
 basically the same as login
 POST to register.php
 use the same header
 body will now look like: {"id":"104","password":"testpass","fname":"testfname","lname":"testlname"}
+
+
+Get cards for user:
+
+GET http://localhost/cards.php?user_id=x
+
+
+Add card:
+
+POST http://localhost/cards.php
+body: {"user_id":104,"front":"text here","back":"text here"}
+
+
+Delete card:
+
+DELETE http://localhost/cards.php?card_id=x
