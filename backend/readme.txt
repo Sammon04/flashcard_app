@@ -1,2 +1,12 @@
-directory for backend files, like PHP or something
-Delete this after you add some files
+how to test login:
+
+to login, you will POST to localhost/login.php (or wherever you have it)
+you can test it using curl or postman, idk how it works with react yet, but sending json should be easy
+include the header: "Content-Type: application/json"
+the body will of course be JSON with keys id, and password
+example body: {"id":"102","password":"testpass"}
+the passwords are stored hashed on the database, but frontend doesn't need to do any hashing.
+just send the plain password to the backend and the backend will test the hashes
+
+example request with curl:
+curl -X POST http://localhost/login.php -H "Content-Type: application/json" -d {"id":"102","password":"testpass"}

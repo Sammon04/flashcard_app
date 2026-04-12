@@ -4,47 +4,48 @@ CREATE SCHEMA flashcard_app;
 USE flashcard_app;
 
 CREATE TABLE user (
-    User_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    Fname VARCHAR(30) NOT NULL,
-    Lname VARCHAR(30) NOT NULL,
-    Role VARCHAR(30),
-    District VARCHAR(30),
-    Locale VARCHAR(10),
-    Score INT DEFAULT 0,
-    Admin BOOLEAN NOT NULL DEFAULT FALSE
+    user_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    fname VARCHAR(30) NOT NULL,
+    lname VARCHAR(30) NOT NULL,
+    role VARCHAR(30),
+    district VARCHAR(30),
+    locale VARCHAR(10),
+    score INT DEFAULT 0,
+    admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE flashcard (
-    Card_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    User_ID INT NOT NULL,
-    Front VARCHAR(300) NOT NULL,
-    Back VARCHAR(300) NOT NULL,
-    Points INT NOT NULL,
+    card_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    card_user_id INT NOT NULL,
+    front VARCHAR(300) NOT NULL,
+    back VARCHAR(300) NOT NULL,
+    points INT NOT NULL,
 
     CONSTRAINT fk_user_id
-        FOREIGN KEY (User_ID)
-        REFERENCES user(User_ID)
+        FOREIGN KEY (card_user_id)
+        REFERENCES user(user_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
 CREATE TABLE user_answers (
-    User_ID INT NOT NULL,
-    Card_ID INT NOT NULL,
-    Times_answered INT DEFAULT 0 NOT NULL,
-    Times_skipped INT DEFAULT 0 NOT NULL,
-    Date_last_answered DATE,
-    PRIMARY KEY (User_ID, Card_ID),
+    answer_user_id INT NOT NULL,
+    answer_card_id INT NOT NULL,
+    times_answered INT DEFAULT 0 NOT NULL,
+    times_skipped INT DEFAULT 0 NOT NULL,
+    date_last_answered DATE,
+    PRIMARY KEY (answer_user_id, answer_card_id),
 
     CONSTRAINT fk_answer_user_id
-        FOREIGN KEY (User_ID)
-        REFERENCES user(User_ID)
+        FOREIGN KEY (answer_user_id)
+        REFERENCES user(user_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     
     CONSTRAINT fk_answer_card_id
-        FOREIGN KEY (Card_ID)
-        REFERENCES flashcard(Card_ID)
+        FOREIGN KEY (answer_card_id)
+        REFERENCES flashcard(card_id)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
