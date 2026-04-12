@@ -10,16 +10,16 @@ include "database.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$emp_id = $data['id'] ?? '';
+$id = $data['id'] ?? '';
 $password = $data['password'] ?? '';
 
-if (!$emp_id || !$password) {
+if (!$id || !$password) {
     echo json_encode(["error" => "Missing credentials"]);
     exit;
 }
 
 $query = $db->prepare("SELECT user_id, password FROM user WHERE user_id = ?");
-$query->bind_param("s", $emp_id);
+$query->bind_param("i", $id);
 $query->execute();
 
 $result = $query->get_result();

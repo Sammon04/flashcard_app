@@ -10,3 +10,11 @@ just send the plain password to the backend and the backend will test the hashes
 
 example request with curl:
 curl -X POST http://localhost/login.php -H "Content-Type: application/json" -d {"id":"102","password":"testpass"}
+
+
+how to test registration:
+
+basically the same as login
+POST to register.php
+use the same header
+body will now look like: {"id":"104","password":"testpass","fname":"testfname","lname":"testlname"}
