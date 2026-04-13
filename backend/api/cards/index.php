@@ -64,6 +64,37 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
         break;
     
+    case 'PUT':
+
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        $card_id = $data['card_id'] ?? '';
+        $new_front = $data['front'] ?? '';
+        $new_back = $data['back'] ?? '';
+
+        if (!$card_id || (!$new_front && !$new_back)) {
+            echo json_encode(["error" => "Missing card data"]);
+            exit;
+        }
+
+        if ($new_front && $new_back){
+            $query = $db->prepare("UPDATE flashcard SET front = ?, back = ? WHERE card_id = ?");
+            $query->bind_param("ssi", $new_front, $new_back, $card_id);
+        } elseif ($new_front && !$new_back) {
+            $query = $db->prepare("UPDATE flashcard SET front = ? WHERE card_id = ?");
+            $query->bind_param("si", $new_front, $card_id);
+        } else {
+            $query = $db->prepare("UPDATE flashcard SET back = ? WHERE card_id = ?");
+            $query->bind_param("si", $new_back, $card_id);
+        }
+
+        if ($query->execute()){
+            echo json_encode(["success" => true]);
+        } else {
+            echo json_encode(["error" => "Failed to update card"]);
+        }
+        break;
+    
     case 'DELETE':
 
         $card_id = $_GET['card_id'];
