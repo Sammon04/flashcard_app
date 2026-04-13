@@ -18,7 +18,7 @@ if (!$id || !$password) {
     exit;
 }
 
-$query = $db->prepare("SELECT user_id, password FROM user WHERE user_id = ?");
+$query = $db->prepare("SELECT * FROM user WHERE user_id = ?");
 $query->bind_param("i", $id);
 $query->execute();
 
@@ -28,7 +28,13 @@ if ($user = $result->fetch_assoc()) {
     if (password_verify($password, $user['password'])) {
         echo json_encode([
             "success" => true,
-            "user_id" => $user['user_id']
+            "user_id" => $user['user_id'],
+            "fname" => $user['fname'],
+            "lname" => $user['lname'],
+            "role" => $user['role'],
+            "district" => $user['district'],
+            "locale" => $user['locale'],
+            "admin" => $user['admin']
         ]);
     } else {
         echo json_encode(["error" => "Invalid password"]);

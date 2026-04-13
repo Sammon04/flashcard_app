@@ -1,11 +1,21 @@
 import LoginForm from '../components/LoginForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Session } from '../util/Session'
 
 function Login() {
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
+    //Send user to appropriate dashboard if they're already logged in
+    useEffect(() => {        
+        if (Session.isLoggedIn()) {
+            const userData = Session.getCurUser()
+            navigate((userData.admin) ? "/admin_dashboard" : "/dashboard")
+        }
+    }, [navigate])
+
+    //Function to call when user clicks login button
     const handleLoginAttempt = async (id, password) => {
         setError('')
         try {
@@ -18,11 +28,8 @@ function Login() {
             const data = await response.json()
 
             if (data.success) {
-                console.log("Login success for user id:", data.user_id)
-                //TODO: Actually save the returned user_id somewhere to "log in" the user
-                //TODO: Check if user is admin or not -> navigate to appropriate dashboards
-                //      This would need 'admin' to be passed back to us as well
-                navigate('/dashboard')
+                Session.setUser(data)
+                navigate(data.admin ? '/admin_dashboard' : '/dashboard')
             } else {
                 setError(data.error || 'Login failed.')
             }
