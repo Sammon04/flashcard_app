@@ -9,7 +9,7 @@ function Login() {
     const handleLoginAttempt = async (id, password) => {
         setError('')
         try {
-            const response = await fetch('http://localhost/flashcard_app/backend/login.php', {
+            const response = await fetch('http://localhost/flashcard_app/backend/api/users/login.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({id, password})

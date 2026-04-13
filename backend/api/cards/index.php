@@ -13,6 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+//Action depends on which method is used
+//GET = get all cards for user
+//POST = add card for user
+//DELETE = delete card
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         $user_id = $_GET['user_id'] ?? '';
