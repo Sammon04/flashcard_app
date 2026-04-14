@@ -18,7 +18,7 @@ if (!$id || !$password) {
     exit;
 }
 
-$query = $db->prepare("SELECT * FROM user WHERE user_id = ?");
+$query = $db->prepare("SELECT user_id, password FROM user WHERE user_id = ?");
 $query->bind_param("i", $id);
 $query->execute();
 

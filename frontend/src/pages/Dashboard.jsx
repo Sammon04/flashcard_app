@@ -2,7 +2,9 @@ import { Session } from "../util/Session"
 import Header from '../components/Header'
 
 function Dashboard() {
-    console.log(Session.getCurUser())
+    const navigate = useNavigate()
+    const curUser = Session.getCurUser()
+
     return (
         <>
         <Header />

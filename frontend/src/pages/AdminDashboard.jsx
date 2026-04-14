@@ -1,8 +1,13 @@
 import { Session } from "../util/Session"
 import Header from '../components/Header'
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 function AdminDashboard() {
-    console.log(Session.getCurUser())
+    const navigate = useNavigate()
+    const curUser = Session.getCurUser()
+
+
     return (
         <>
         <Header />

@@ -14,7 +14,7 @@ if (!$id) {
     echo json_encode(["error" => "missing user id"]);
 }
 
-$query = $db->prepare("SELECT fname, lname, role, district, locale, score, admin FROM user_info WHERE info_user_id = ?");
+$query = $db->prepare("SELECT user_id, fname, lname, role, district, locale, score, admin FROM user_info JOIN user ON user.user_id = user_info.info_user_id WHERE info_user_id = ?");
 $query->bind_param("i", $id);
 $query->execute();
 

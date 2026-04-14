@@ -25,13 +25,25 @@ function Login() {
                 body: JSON.stringify({id, password})
             })
 
-            const data = await response.json()
+            const successData = await response.json()
 
-            if (data.success) {
-                Session.setUser(data)
-                navigate(data.admin ? '/admin_dashboard' : '/dashboard')
+            if (successData.success) {
+                try {
+                    const response = await fetch(`http://localhost/flashcard_app/backend/api/users/user_info.php?id=${encodeURIComponent(id)}`)
+
+                    const data = await response.json()
+
+                    if (data.success) {
+                        Session.setUser(data)
+                        navigate(data.admin ? '/admin_dashboard' : '/dashboard')
+                    } else {
+                        setError(data.error || 'User info fetch failed.')
+                    }
+                } catch (err) {
+                    setError('Could not connect to server.')
+                }
             } else {
-                setError(data.error || 'Login failed.')
+                setError(successData.error || 'Login failed.')
             }
         } catch (err) {
             setError('Could not connect to server.')
