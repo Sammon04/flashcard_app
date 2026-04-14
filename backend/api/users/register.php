@@ -20,11 +20,22 @@ if (!$id || !$password || !$fname || !$lname) {
     exit;
 }
 
-$query = $db->prepare("INSERT INTO user (user_id, password, fname, lname) VALUES (?, ?, ?, ?)");
-$query->bind_param("isss", $id, $password, $fname, $lname);
+$query1 = $db->prepare("INSERT INTO user (user_id, password) VALUES (?, ?)");
+$query1->bind_param("is", $id, $password);
+$query2 = $db->prepare("INSERT INTO user_info (info_user_id, fname, lname) VALUES (?, ?, ?)");
+$query2->bind_param("iss", $id, $fname, $lname);
 
-if ($query->execute()) {
+$db->begin_transaction();
+
+try {
+    $query1->execute();
+    $query2->execute();
+
+    $db->commit();
+
     echo json_encode(["success" => true]);
-} else {
-    echo json_encode(["error" => "Registration failed"]);
+} catch (Exception $e) {
+    $db->rollback();
+
+    echo json_encode(["error" => "Failed to register user"]);
 }

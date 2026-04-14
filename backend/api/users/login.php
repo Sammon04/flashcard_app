@@ -28,13 +28,7 @@ if ($user = $result->fetch_assoc()) {
     if (password_verify($password, $user['password'])) {
         echo json_encode([
             "success" => true,
-            "user_id" => $user['user_id'],
-            "fname" => $user['fname'],
-            "lname" => $user['lname'],
-            "role" => $user['role'],
-            "district" => $user['district'],
-            "locale" => $user['locale'],
-            "admin" => $user['admin']
+            "user_id" => $user['user_id']
         ]);
     } else {
         echo json_encode(["error" => "Invalid password"]);
