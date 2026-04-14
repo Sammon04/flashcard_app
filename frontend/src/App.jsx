@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import Play from './pages/Play'
 import AdminDashboard from './pages/AdminDashboard'
 import RequireAuth from './components/RequireAuth'
 import './App.css'
@@ -15,6 +16,13 @@ function App() {
       <Route path='/dashboard' element={
         <RequireAuth>
           <Dashboard />
+        </RequireAuth>
+      } />
+
+      {/*Play screen for regular users*/}
+      <Route path='/play' element={
+        <RequireAuth>
+          <Play />
         </RequireAuth>
       } />
 
