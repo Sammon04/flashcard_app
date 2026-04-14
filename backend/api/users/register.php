@@ -12,8 +12,13 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 $id = $data['id'];
 $password = password_hash($data['password'], PASSWORD_DEFAULT);
-$fname = $data['fname'];
-$lname = $data['lname'];
+$fname = $data['fname'] ?? 'N/A';
+$lname = $data['lname'] ?? 'N/A';
+$image = $data['image'] ?? null;
+$role = $data['role'] ?? 'N/A';
+$district = $data['district'] ?? 'N/A';
+$locale = $data['locale'] ?? 'N/A';
+$wildcard = $data['wildcard'] ?? 'N/A';
 
 if (!$id || !$password || !$fname || !$lname) {
     echo json_encode(["error" => "Missing user data"]);
@@ -22,8 +27,8 @@ if (!$id || !$password || !$fname || !$lname) {
 
 $query1 = $db->prepare("INSERT INTO user (user_id, password) VALUES (?, ?)");
 $query1->bind_param("is", $id, $password);
-$query2 = $db->prepare("INSERT INTO user_info (info_user_id, fname, lname) VALUES (?, ?, ?)");
-$query2->bind_param("iss", $id, $fname, $lname);
+$query2 = $db->prepare("INSERT INTO user_info (info_user_id, image, fname, lname, role, district, locale, wildcard) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$query2->bind_param("isssssss", $id, $image, $fname, $lname, $role, $district, $locale, $wildcard);
 
 $db->begin_transaction();
 
