@@ -1,5 +1,7 @@
 table {
 
+    margin: 25px auto  auto auto;
+
     border-collapse: collapse;
 
 }
@@ -9,4 +11,17 @@ thead {
 
     color: var(--inverse-text-color);
 
+}
+
+tbody td {
+    border-collapse: separate;
+    border: 1px solid black;
+}
+
+tr:nth-child(even){
+    background-color: lightgray;
+}
+
+td {
+    padding: 5px;
 }
