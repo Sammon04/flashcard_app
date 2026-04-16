@@ -12,7 +12,7 @@ INSERT INTO user (user_id, password, score, Admin) VALUES
     (103, "$2y$10$vUkH.Ne/RZGCg.Moh2i7TeFm1DYJozMaONwwU28Agmj2HNaDXWjI.", 0, FALSE);
 
 INSERT INTO user_info(info_user_id, fname, lname, role, district, locale, wildcard) VALUES
-    (100, "Raymond", "Didonato", "Front-end Dev", "Redford", "english", "placeholder"),
-    (101, "Samuel", "Belanger", "Back-end Dev", "Redford", "english", "placeholder"),
-    (102, "Gabriel", "Ball", "Front-end Dev", "Somewhere", "english", "placeholder"),
-    (103, "Lohann", "spy_tf2", "Creative lead", "France", "french", "placeholder");
+    (100, "Raymond", "Didonato", "Some kind of Dev", "Redford 2", " maybe english", "not placeholder"),
+    (101, "Samuel", "Belanger", "Back-end Dev", "Redford", " probably english", "holderplace"),
+    (102, "Gabriel", "Ball", "Front-end Dev", "Somewhere", "definitely english", "place"),
+    (103, "Lohann", "spy_tf2", "Creative lead", "France", "french", "holder");
