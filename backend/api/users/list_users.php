@@ -10,7 +10,7 @@ include "../../database.php";
 
 $users = [];
 
-$query = $db->prepare("SELECT * FROM user JOIN user_info ON user.user_id = user_info.info_user_id");
+$query = $db->prepare("SELECT * FROM user JOIN user_info ON user.user_id = user_info.info_user_id ORDER BY user.score DESC");
 
 if ($query->execute()) {
     $result = $query->get_result();
@@ -19,9 +19,8 @@ if ($query->execute()) {
         unset($row['info_user_id']);
         unset($row['password']);
         $users[] = $row;
-    
-    echo json_encode($users);
     }
+    echo json_encode($users);
 
 } else {
     echo json_encode(["error" => "Failed to get users"]);
