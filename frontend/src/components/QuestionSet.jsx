@@ -64,11 +64,13 @@ function QuestionSet(props) {
     })
     
     return(
-        <section>
+        <section className='questionSet'>
+            <div className='imgDiv'><img src="../../favicon.png"></img></div>
             {questionsJSX}
-            <br/>
-            <button>Skip</button>
-            <button onClick={() => {console.log(selectedAnswers)}}>Submit</button>
+            <div className='actionsDiv'>
+                <button>Skip</button>
+                <button onClick={() => {console.log(selectedAnswers)}}>Submit</button>
+            </div>
         </section>
     )
 }

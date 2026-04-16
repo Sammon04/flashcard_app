@@ -16,37 +16,46 @@ function Question(props) {
 
     return(
         <article>
-            <p>{props.question.text}</p>
+            <h5>{props.question.text}</h5>
 
-            <label htmlFor={props.id + "answer1"}>
-                {props.question.answer1}
-            </label>
-            <input type="radio" name={props.id + "answer"} id={props.id + "answer1"} value="1"
-                checked={props.selectedAnswers[props.id].val === "1"}
-                onChange={handleChange}/>
+            <div className="answerGrid">
+                <div className="labelAndRadio">
+                    <label htmlFor={props.id + "answer1"}>
+                        {props.question.answer1}
+                    </label>
+                    <input type="radio" name={props.id + "answer"} id={props.id + "answer1"} value="1"
+                        checked={props.selectedAnswers[props.id].val === "1"}
+                        onChange={handleChange}/>
+                </div>
 
-            <label htmlFor={props.id + "answer2"}>
-                {props.question.answer2}
-            </label>
-            <input type="radio" name={props.id + "answer"} id={props.id + "answer2"} value="2"
-                checked={props.selectedAnswers[props.id].val === "2"}
-                onChange={handleChange}/>
+                <div className="labelAndRadio">
+                    <label htmlFor={props.id + "answer2"}>
+                        {props.question.answer2}
+                    </label>
+                    <input type="radio" name={props.id + "answer"} id={props.id + "answer2"} value="2"
+                        checked={props.selectedAnswers[props.id].val === "2"}
+                        onChange={handleChange}/>
+                </div>
 
-            <br/>
+                <div className="labelAndRadio">
+                    <label htmlFor={props.id + "answer3"}>
+                        {props.question.answer3}
+                    </label>
+                    <input type="radio" name={props.id + "answer"} id={props.id + "answer3"} value="3"
+                        checked={props.selectedAnswers[props.id].val === "3"}
+                        onChange={handleChange}/>
+                </div>
 
-            <label htmlFor={props.id + "answer3"}>
-                {props.question.answer3}
-            </label>
-            <input type="radio" name={props.id + "answer"} id={props.id + "answer3"} value="3"
-                checked={props.selectedAnswers[props.id].val === "3"}
-                onChange={handleChange}/>
+                <div className="labelAndRadio">
+                    <label htmlFor={props.id + "answer4"}>
+                        {props.question.answer4}
+                    </label>
+                    <input type="radio" name={props.id + "answer"} id={props.id + "answer4"} value="4"
+                        checked={props.selectedAnswers[props.id].val === "4"}
+                        onChange={handleChange}/>
+                </div>
+            </div>
 
-            <label htmlFor={props.id + "answer4"}>
-                {props.question.answer4}
-            </label>
-            <input type="radio" name={props.id + "answer"} id={props.id + "answer4"} value="4"
-                checked={props.selectedAnswers[props.id].val === "4"}
-                onChange={handleChange}/>
         </article>
     )
 }

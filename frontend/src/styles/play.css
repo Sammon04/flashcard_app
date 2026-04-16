@@ -1,0 +1,52 @@
+.questionSet {
+    width: max-content;
+
+    margin: auto;
+    padding-bottom: 10px;
+    
+    box-shadow: var(--shadow);
+
+    text-align: left;
+}
+
+
+.questionSet .imgDiv{
+    background-color: var(--accent-color);
+    padding: 25px;
+}
+
+.questionSet article {
+    padding: 10px;
+}
+
+.questionSet h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    text-decoration: underline;
+}
+
+.questionSet .answerGrid {
+    
+    display: grid;
+    grid-template-columns: 40% 40%;
+    column-gap: 20%;
+}
+
+.questionSet .labelAndRadio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.questionSet label {
+    align-content: center;
+}
+
+.questionSet .actionsDiv {
+    text-align: center;
+}
+
+.questionSet button {
+    margin: 0px 5px;
+}
