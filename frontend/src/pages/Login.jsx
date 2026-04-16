@@ -29,11 +29,11 @@ function Login() {
 
             if (successData.success) {
                 try {
-                    const response = await fetch(`http://localhost/flashcard_app/backend/api/users/user_info.php?id=${encodeURIComponent(id)}`)
+                    const response = await fetch(`http://localhost/flashcard_app/backend/api/users/get_user.php?id=${encodeURIComponent(id)}`)
 
                     const data = await response.json()
-
-                    if (data.success) {
+                    console.log(data)
+                    if (data) {
                         Session.setUser(data)
                         navigate(data.admin ? '/admin_dashboard' : '/dashboard')
                     } else {
