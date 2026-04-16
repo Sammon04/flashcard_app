@@ -8,9 +8,11 @@ function Dashboard() {
 
     return (
         <>
-        <Header />
+            <Header />
             <h1>This will be the regular user dashboard</h1>
-            <button onClick={() => {window.location.href="/play"}}>Play!</button>
+            <main>
+                <button onClick={() => {window.location.href="/play"}}>Play!</button>
+            </main>
         </>
     )
 }

@@ -1,0 +1,13 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: var(--accent-color);
+
+    color: var(--inverse-text-color);
+}
+
+header span {
+    margin-right: 10px;
+}

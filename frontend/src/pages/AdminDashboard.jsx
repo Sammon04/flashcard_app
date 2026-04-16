@@ -43,12 +43,13 @@ function AdminDashboard() {
         <>
             <Header />
             <h1>This will be the admin (hr) dashboard</h1>
-            {(tempUserList.length > 0) ? (
-                <UserList userList={tempUserList} onEdit={editUser} onDelete={deleteUser}/>
-            ) : (
-                <p className="empty-message">No users found in the system.</p>
-            )}
-            
+            <main>
+                {(tempUserList.length > 0) ? (
+                    <UserList userList={tempUserList} onEdit={editUser} onDelete={deleteUser}/>
+                ) : (
+                    <p className="empty-message">No users found in the system.</p>
+                )}
+            </main>
         </>
     )
 }

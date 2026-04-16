@@ -9,9 +9,11 @@ function Play() {
 
     return (
         <>
-            <QuestionSet userID={curUser}/>
-            <br/>
-            <button onClick={() => {window.location.href="/"}}>Return to Dashboard</button>
+            <main>
+                <QuestionSet userID={curUser}/>
+                <br/>
+                <button onClick={() => {window.location.href="/"}}>Return to Dashboard</button>
+            </main>
         </>
     )
 }

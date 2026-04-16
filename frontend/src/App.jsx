@@ -1,10 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
+
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Play from './pages/Play'
 import AdminDashboard from './pages/AdminDashboard'
 import RequireAuth from './components/RequireAuth'
+
 import './App.css'
+import './styles/header.css'
+import './styles/login.css'
+import './styles/dashboard.css'
+import './styles/play.css'
+import './styles/adminDashboard.css'
 
 function App() {
   return (

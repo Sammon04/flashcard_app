@@ -1,10 +1,46 @@
-/*Variables*/
 :root {
-  /*Just Testing*/
-  --primary-color: grey;
+  --primary-color: rgb(248, 248, 250);
+  --accent-color: rgb(36, 36, 64);
+
+  --text-color: black;
+  --inverse-text-color: white;
+  font-family:'Times New Roman', Times, serif;
+  text-align: center;
+  font-size: larger;
 }
 
-/*Just Testing*/
+/*
+
+css vars order {
+
+  size
+
+  margin / padding
+
+  display
+
+  background stuff
+
+  text stuff
+
+  border stuff
+
+  other stuff
+
+}
+*/
+
 body {
+  margin: 0px;
+
   background-color: var(--primary-color);
+}
+
+h1 {
+  margin: 0px;
+  padding: 2%;
+
+  background-color: var(--accent-color);
+
+  color:white;
 }
