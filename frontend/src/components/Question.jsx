@@ -21,7 +21,7 @@ function Question(props) {
             <div className="answerGrid">
                 <div className="labelAndRadio">
                     <label htmlFor={props.id + "answer1"}>
-                        {props.question.answer1}
+                        {props.question.answers[0]}
                     </label>
                     <input type="radio" name={props.id + "answer"} id={props.id + "answer1"} value="1"
                         checked={props.selectedAnswers[props.id].val === "1"}
@@ -30,7 +30,7 @@ function Question(props) {
 
                 <div className="labelAndRadio">
                     <label htmlFor={props.id + "answer2"}>
-                        {props.question.answer2}
+                        {props.question.answers[1]}
                     </label>
                     <input type="radio" name={props.id + "answer"} id={props.id + "answer2"} value="2"
                         checked={props.selectedAnswers[props.id].val === "2"}
@@ -39,7 +39,7 @@ function Question(props) {
 
                 <div className="labelAndRadio">
                     <label htmlFor={props.id + "answer3"}>
-                        {props.question.answer3}
+                        {props.question.answers[2]}
                     </label>
                     <input type="radio" name={props.id + "answer"} id={props.id + "answer3"} value="3"
                         checked={props.selectedAnswers[props.id].val === "3"}
@@ -48,7 +48,7 @@ function Question(props) {
 
                 <div className="labelAndRadio">
                     <label htmlFor={props.id + "answer4"}>
-                        {props.question.answer4}
+                        {props.question.answers[3]}
                     </label>
                     <input type="radio" name={props.id + "answer"} id={props.id + "answer4"} value="4"
                         checked={props.selectedAnswers[props.id].val === "4"}

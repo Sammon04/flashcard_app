@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import Question from './Question.jsx'
 
+const tags = ['role', 'district', 'locale', 'wildcard']
+const questionTexts = [
+    'What is this person\'s role?',
+    'What is this person\'s district?',
+    'What is this person\'s primary language?',
+    'Which of these is an interesting fact about this person?',
+]
+
 function QuestionSet(props) {
     const [questions, setQuestions] = useState([])
 
@@ -13,45 +21,47 @@ function QuestionSet(props) {
         {id: 4, val:"-1"},
     ])
 
-    // TODO: replace with actual fetching
+    const fetchAnswerSet = async () => {
+        try {
+            const response = await fetch('http://localhost/flashcard_app/backend/api/users/get_answers.php?id=100')
+
+            const answerData = await response.json()
+            if (!answerData.error) {
+                const newQuestions = []
+
+                for (let i = 0; i < 4; i++)
+                {
+                    // Which answer should be the correct one?
+                    let place = Math.floor(Math.random() * 4)
+                    const question = []
+
+                    // Add the answers to the question
+                    for (let j = 0; j < place; j++) {
+                        question.push(
+                            answerData[i][tags[i]].Incorrect[j]
+                        )
+                    }
+                    question.push(answerData[i][tags[i]].Correct)
+                    for (let j = place; j < 4; j++) {
+                        question.push(
+                            answerData[i][tags[i]].Incorrect[j]
+                        )
+                    }
+
+                    newQuestions.push({text: questionTexts[i], answers: question})
+                }
+
+                setQuestions(newQuestions)
+            } else {
+                console.log(answerData.error)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     if (!questions.length) {
-        setQuestions([
-            {
-                text : "What is this person's name?",
-                answer1 : "Raymond DiDonato",
-                answer2 : "Samuel Belanger",
-                answer3 : "Gabriel Ball",
-                answer4 : "Lohann spy_tf2",
-            },
-            {
-                text : "What is this person's role?",
-                answer1 : "Front-end Dev",
-                answer2 : "Back-end Dev",
-                answer3 : "Creative lead",
-                answer4 : "Wait, they work here?",
-            },
-            {
-                text : "What is this person's district?",
-                answer1 : "Redford",
-                answer2 : "Somewhere",
-                answer3 : "France",
-                answer4 : "Nowhere",
-            },
-            {
-                text : "What is this person's primary language?",
-                answer1 : "English",
-                answer2 : "French",
-                answer3 : "Klingon",
-                answer4 : "Morse Code",
-            },
-            {
-                text : "Which of these is an interesting fact about this person?",
-                answer1 : "placeholder",
-                answer2 : "placeholder",
-                answer3 : "placeholder",
-                answer4 : "placeholder",
-            },
-        ])
+        fetchAnswerSet();
     }
 
 
