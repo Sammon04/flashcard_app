@@ -1,8 +1,6 @@
 import { Session } from "../util/Session";
 
-function Header() {
-    const user = Session.getCurUser()
-
+function Header({ user }) {
     return (
         <header className="dashboard-header">
             <div className="logo">LOGO</div>

@@ -8,7 +8,7 @@ function Dashboard() {
 
     return (
         <>
-            <Header />
+            <Header user={curUser} />
             <h1>This will be the regular user dashboard</h1>
             <main>
                 <button onClick={() => {window.location.href="/play"}}>Play!</button>

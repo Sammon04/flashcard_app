@@ -12,6 +12,7 @@ function UserList({ userList, onEdit, onDelete }) {
                     <th>Role</th>
                     <th>District</th>
                     <th>Locale</th>
+                    <th>Score</th>
                     {/*Buttons like Edit or Delete*/}
                     <th>Actions</th>
                 </tr>
