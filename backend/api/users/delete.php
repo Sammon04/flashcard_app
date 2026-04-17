@@ -1,27 +1,30 @@
 <?php
 
-//(hopefully) Avoids CORS issues for now
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
+include "../config/init.php";
 
-header("Content-Type: application/json");
-include "../../database.php";
+$data = get_json();
 
-$data = json_decode(file_get_contents("php://input"), true);
+$id = $data['id'] ?? null;
 
-$id = $data['id'];
-
-if (!$id) {
-    echo json_encode(["error" => "Missing user ID"]);
-    exit;
+//TODO add type checking to all inputs
+if ($id === null) {
+    send_response(['error' => 'Missing user id'], 400);
 }
 
-$query = $db->prepare("DELETE FROM user WHERE user_id = ?");
-$query->bind_param("i", $id);
+try {
 
-if ($query->execute()) {
-    echo json_encode(["success" => true]);
-} else {
-    echo json_encode(["error" => "Failed to delete user"]);
+    $sql = "DELETE FROM user 
+            WHERE user_id = ?";
+
+    $query = $db->prepare($sql);
+    $query->bind_param("i", $id);
+    $query->execute();
+
+    if ($query->affected_rows === 0) {
+        send_response(['error' => 'User not found'], 404);
+    }
+
+    send_response(['success' => true]);
+} catch (Exception $e) {
+    send_response(['error' => 'Database error'], 500);
 }

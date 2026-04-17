@@ -1,46 +1,56 @@
 <?php
 
-//(hopefully) Avoids CORS issues for now
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
+include "../config/init.php";
 
-header("Content-Type: application/json");
-include "../../database.php";
+$data = get_json();
 
-$data = json_decode(file_get_contents("php://input"), true);
-
-$id = $data['id'];
-$password = password_hash($data['password'], PASSWORD_DEFAULT);
-$fname = $data['fname'] ?? 'N/A';
-$lname = $data['lname'] ?? 'N/A';
+$id = $data['id'] ?? null;
+$password = $data['password'] ?? null;
+$fname = $data['fname'] ?? null;
+$lname = $data['lname'] ?? null;
 $image = $data['image'] ?? null;
-$role = $data['role'] ?? 'N/A';
-$district = $data['district'] ?? 'N/A';
-$locale = $data['locale'] ?? 'N/A';
-$wildcard = $data['wildcard'] ?? 'N/A';
+$role = $data['role'] ?? null;
+$district = $data['district'] ?? null;
+$locale = $data['locale'] ?? null;
+$wildcard = $data['wildcard'] ?? null;
 
-if (!$id || !$password || !$fname || !$lname) {
-    echo json_encode(["error" => "Missing user data"]);
-    exit;
+if ($id === null || $password === null || $fname === null || $lname === null) {
+    send_response(['error' => 'Missing user data'], 400);
 }
 
-$query1 = $db->prepare("INSERT INTO user (user_id, password) VALUES (?, ?)");
-$query1->bind_param("is", $id, $password);
-$query2 = $db->prepare("INSERT INTO user_info (info_user_id, image, fname, lname, role, district, locale, wildcard) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$query2->bind_param("isssssss", $id, $image, $fname, $lname, $role, $district, $locale, $wildcard);
-
-$db->begin_transaction();
+$password = password_hash($password, PASSWORD_DEFAULT);
 
 try {
+
+    $db->begin_transaction();
+
+    $sql1 = "INSERT INTO user (user_id, password) 
+    VALUES (?, ?)";
+
+    $sql2 = "INSERT INTO user_info 
+    (info_user_id, fname, lname, image, role, district, locale, wildcard) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    $query1 = $db->prepare($sql1);
+    $query1->bind_param("is", $id, $password);
+    $query2 = $db->prepare($sql2);
+    $query2->bind_param("isssssss", $id, $fname, $lname, $image, $role, $district, $locale, $wildcard);
+
     $query1->execute();
     $query2->execute();
 
     $db->commit();
 
-    echo json_encode(["success" => true]);
+    send_response(['success' => true]);
+
+
 } catch (Exception $e) {
     $db->rollback();
 
-    echo json_encode(["error" => "Failed to register user"]);
+    if ($e->getCode() == 1062) {
+        send_response(['error' => 'User already exists'], 409);
+    }
+
+    send_response(['error' => 'Database error'], 500);
 }
+

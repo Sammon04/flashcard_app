@@ -1,28 +1,34 @@
 <?php
 
-//(hopefully) Avoids CORS issues for now
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
+include "../config/init.php";
 
-header("Content-Type: application/json");
-include "../../database.php";
+$data = get_json();
 
-$data = json_decode(file_get_contents("php://input"), true);
+$id = $data['id'] ?? null;
+$score = $data['score'] ?? null;
 
-$id = $data['id'] ?? '';
-$score = $data['score'] ?? '';
-
-if (!$id || !$score) {
-    echo json_encode(['error' => "Missing information"]);
-    exit;
+if ($id === null || $score === null) {
+    send_response(['error' => 'Missing request information'], 400);
 }
 
-$query = $db->prepare("UPDATE user SET score = score + ? WHERE user_id = ?");
-$query->bind_param("ii", $score, $id);
+try {
 
-if ($query->execute()) {
-    echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['error' => "Failed to update score"]);
+    $sql = "UPDATE user 
+            SET score = score + ? 
+            WHERE user_id = ?";
+
+    $query = $db->prepare($sql);
+    $query->bind_param("ii", $score, $id);
+    $query->execute();
+
+    if ($query->affected_rows === 0) {
+        send_response(['error' => 'User not found'], 404);
+    }
+
+    send_response(['success' => true]);
+
+
+} catch (Exception $e) {
+    send_response(['error' => 'Database error'], 500);
 }
+

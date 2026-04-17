@@ -1,38 +1,41 @@
 <?php
 
-//(hopefully) Avoids CORS issues for now
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
+include "../config/init.php";
 
-header("Content-Type: application/json");
-include "../../database.php";
+$data = get_json();
 
-$data = json_decode(file_get_contents("php://input"), true);
+$id = $data['id'] ?? null;
+$password = $data['password'] ?? null;
 
-$id = $data['id'] ?? '';
-$password = $data['password'] ?? '';
-
-if (!$id || !$password) {
-    echo json_encode(["error" => "Missing credentials"]);
-    exit;
+if ($id === null || $password === null) {
+    send_response(['error' => 'Missing login info'], 400);
 }
 
-$query = $db->prepare("SELECT user_id, password FROM user WHERE user_id = ?");
-$query->bind_param("i", $id);
-$query->execute();
+try {
 
-$result = $query->get_result();
+    $sql = "SELECT user_id, password 
+            FROM user 
+            WHERE user_id = ?";
 
-if ($user = $result->fetch_assoc()) {
-    if (password_verify($password, $user['password'])) {
-        echo json_encode([
-            "success" => true,
-            "user_id" => $user['user_id']
-        ]);
-    } else {
-        echo json_encode(["error" => "Invalid password"]);
+    $query = $db->prepare($sql);
+    $query->bind_param("i", $id);
+    $query->execute();
+
+    $result = $query->get_result();
+    $user = $result->fetch_assoc();
+
+    if (!$user) {
+        send_response(['error' => 'User not found'], 404);
     }
-} else {
-    echo json_encode(["error" => "User not found"]);
+
+    if (!password_verify($password, $user['password'])) {
+        send_response(['error' => 'Invalid password'], 401);
+    }
+
+    send_response(['user_id' => $user['user_id']]);
+
+} catch (Exception $e) {
+    send_response(['error' => 'Database error'], 500);
 }
+
+

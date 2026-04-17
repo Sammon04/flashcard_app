@@ -1,29 +1,37 @@
 <?php
 
-//(hopefully) Avoids CORS issues for now
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
+include "../config/init.php";
 
-header("Content-Type: application/json");
-include "../../database.php";
+$id = $_GET['id'] ?? null;
 
-$id = $_GET['id'] ?? '';
-
-if (!$id) {
-    echo json_encode(["error" => "missing user id"]);
+if ($id === null) {
+    send_response(['error' => 'Missing user id'], 404);
 }
 
-$query = $db->prepare("SELECT * FROM user JOIN user_info ON user_info.info_user_id = user.user_id WHERE user_id = ?");
-$query->bind_param("i", $id);
-$query->execute();
+try {
 
-$result = $query->get_result();
+    $sql = "SELECT * FROM user AS u 
+            JOIN user_info AS ui
+            ON ui.info_user_id = u.user_id 
+            WHERE user_id = ?";
 
-if ($user = $result->fetch_assoc()) {
+    $query = $db->prepare($sql);
+    $query->bind_param("i", $id);
+    $query->execute();
+
+    $result = $query->get_result();
+    $user = $result->fetch_assoc();
+
+    if (!$user) {
+        send_response(['error' => 'User not found'], 404);
+    }
+
     unset($user['password']);
     unset($user['info_user_id']);
-    echo json_encode($user);
-} else {
-    echo json_encode(["error" => "Failed to fetch user info"]);
+
+    send_response($user);
+
+} catch (Exception $e) {
+    send_response(['error' => 'Database error'], 500);
 }
+

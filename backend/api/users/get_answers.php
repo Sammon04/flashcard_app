@@ -1,45 +1,51 @@
 <?php
 
-//(hopefully) Avoids CORS issues for now
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET");
+include "../config/init.php";
 
-header("Content-Type: application/json");
-include "../../database.php";
+$id = $_GET['id'] ?? null;
 
-$id = $_GET['id'];
-
-if (!$id) {
-    echo json_encode(['error' => "Missing user id"]);
+if ($id === null) {
+    send_response(['error' => 'Missing user id'], 400);
 }
 
-$query = $db->prepare("SELECT role, district, locale, wildcard from user_info WHERE info_user_id = ?");
-$query->bind_param("i", $id);
-$query->execute();
+try {
 
-$result = $query->get_result();
+    $sql = "SELECT role, district, locale, wildcard 
+            FROM user_info 
+            WHERE info_user_id = ?";
 
-if (!($cur_user = $result->fetch_assoc())){
-    echo json_encode(['error' => 'Failed to get answers']);
+    $query = $db->prepare($sql);
+    $query->bind_param("i", $id);
+    $query->execute();
+
+    $result = $query->get_result();
+    $cur_user = $result->fetch_assoc();
+
+    if (!$cur_user){
+        send_response(['error' => 'User not found'], 404);
+    }
+} catch (Exception $e) {
+    send_response(['error' => 'Database error'], 500);
 }
 
 $answers = [];
 
-foreach ($cur_user as $key => $value) {
+try {
 
-    $sql = "SELECT DISTINCT $key 
-            FROM user_info WHERE 
-            info_user_id != ?
-            AND $key != ? 
-            ORDER BY RAND() 
-            LIMIT 3
-        ";
+    foreach ($cur_user as $key => $value) {
 
-    $query = $db->prepare($sql);
-    $query->bind_param("is", $id, $value);
+        $sql = "SELECT DISTINCT $key 
+                FROM user_info WHERE 
+                info_user_id != ?
+                AND $key != ? 
+                ORDER BY RAND() 
+                LIMIT 3
+            ";
 
-    if ($query->execute()) {
+        $query = $db->prepare($sql);
+        $query->bind_param("is", $id, $value);
+        $query->execute();
+
 
         $result = $query->get_result();
         $wrong = [];
@@ -54,11 +60,12 @@ foreach ($cur_user as $key => $value) {
                 'Incorrect' => $wrong
             ]
         ];
-        
-    } else {
-        echo json_encode(['error' => 'Failed to get answers']);
-        exit;
+            
     }
+
+    echo json_encode($answers);
+
+} catch (Exception $e) {
+    send_response(['error' => 'Database error'], 500);
 }
 
-echo json_encode($answers);
