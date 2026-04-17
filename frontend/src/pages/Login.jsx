@@ -2,6 +2,7 @@ import LoginForm from '../components/LoginForm'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Session } from '../util/Session'
+import { BASE_URL } from '../config'
 
 function Login() {
     const [error, setError] = useState('')
@@ -19,34 +20,34 @@ function Login() {
     const handleLoginAttempt = async (id, password) => {
         setError('')
         try {
-            const response = await fetch('http://localhost/flashcard_app/backend/api/users/login.php', {
+            //Attempt login
+            const loginResponse = await fetch(`${BASE_URL}/users/login.php`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({id, password})
             })
+            const loginData = await loginResponse.json()
 
-            const successData = await response.json()
+            //Login did not return success code
+            if (!loginResponse.ok) {
+                setError(loginData.error || 'Login Failed')
+                return;
+            }
 
-            if (successData.success) {
-                try {
-                    const response = await fetch(`http://localhost/flashcard_app/backend/api/users/get_user.php?id=${encodeURIComponent(id)}`)
+            //Get full user data to save to Session
+            const userResponse = await fetch(`${BASE_URL}/users/get_user.php?id=${encodeURIComponent(id)}`)
+            const userData = await userResponse.json()
 
-                    const data = await response.json()
-                    console.log(data)
-                    if (data) {
-                        Session.setUser(data)
-                        navigate(data.admin ? '/admin_dashboard' : '/dashboard')
-                    } else {
-                        setError(data.error || 'User info fetch failed.')
-                    }
-                } catch (err) {
-                    setError('Could not connect to server.')
-                }
-            } else {
-                setError(successData.error || 'Login failed.')
+            //Save user data and redirect to appropriate dashboard
+            if (userResponse.ok) {
+                Session.setUser(userData)
+                navigate(userData.admin ? '/admin_dashboard' : '/dashboard')
+            } else { //User response did not return success code 
+                setError(userData.error || 'User info fetch failed.')
             }
         } catch (err) {
             setError('Could not connect to server.')
+            console.error("Login error: ", err)
         }
     }
 
