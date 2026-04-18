@@ -40,7 +40,8 @@ function QuestionSet(props) {
 
                 // Select an id at random
                 let index = Math.floor(Math.random() * others.length)
-                setImageURL(others[index].image)
+                console.log(others[index])
+                setImageURL('http://localhost/flashcard_app/' + others[index].image)
                 setError('')
                 return others[index].user_id
             } else {
@@ -149,7 +150,10 @@ function QuestionSet(props) {
 
     return(
         <section className='questionSet'>
-            <div className='imgDiv'><img src="../../favicon.png"></img></div>
+            <div className='imgDiv'>
+                <img src={imageURL || 'http://localhost/flashcard_app/backend/uploads/users/human.png'} />
+            </div>
+
             {questionsJSX}
             <div className='actionsDiv'>
                 <button onClick={handleSkip}>{submitted ? 'Next Person' : 'Skip'}</button>

@@ -1,5 +1,6 @@
 .questionSet {
     width: max-content;
+    max-width: 80%;
 
     margin: auto;
     padding-bottom: 10px;
@@ -10,9 +11,25 @@
 }
 
 
-.questionSet .imgDiv{
+.questionSet .imgDiv {
     background-color: var(--accent-color);
     padding: 25px;
+}
+
+.questionSet img {
+    object-fit: cover;
+    display: block;
+
+    margin: auto;
+    height: 60vh;
+    border-radius: 100%;
+    box-shadow: var(--shadow);
+    transform-origin: top;
+    transform: scale(1);
+    transition: 0.3s;}
+
+.questionSet img:hover {
+    transform: scale(1.5);
 }
 
 .questionSet article {
