@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
-import CreateUserForm from "../components/CreateUserForm"
+import UserForm from "../components/UserForm"
 import { BASE_URL } from '../config'
 import Header from "../components/Header"
 import { Session } from "../util/Session"
@@ -33,7 +33,6 @@ function CreateUser() {
         }
     }
 
-
     return (
         <>
             <Header user={Session.getCurUser()} />
@@ -41,7 +40,7 @@ function CreateUser() {
             <main>
                 {/*Show error message if there is one to show*/}
                 {error && <p className='error-message'>{error}</p>}
-                <CreateUserForm onSubmit={handleCreateUser}/>
+                <UserForm onSubmit={handleCreateUser}/>
             </main>
         </>
     )

@@ -13,6 +13,7 @@ import './styles/login.css'
 import './styles/dashboard.css'
 import './styles/play.css'
 import './styles/adminDashboard.css'
+import EditUser from './pages/EditUser';
 
 function App() {
   return (
@@ -48,6 +49,12 @@ function App() {
         </RequireAuth>
       } />
 
+      {/*(Admin/HR) edit user page*/}
+      <Route path='/edit_user/:id' element={
+        <RequireAuth adminOnly>
+          <EditUser />
+        </RequireAuth>
+      } />
     </Routes>
   )
 }

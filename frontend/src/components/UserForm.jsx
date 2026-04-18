@@ -1,16 +1,17 @@
 import { useState } from "react"
 
-function CreateUserForm({ onSubmit }) {
+function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
+    //Initialize form data with initalData if it exists, otherwise empty
     const [formData, setFormData] = useState({
-        id: "",
-        password: "",
-        fname: "",
-        lname: "",
-        role: "",
-        district: "",
-        locale: "",
-        wildcard: "",
-        image: ""
+        id: initialData.user_id || "",
+        fname: initialData.fname || "",
+        lname: initialData.lname || "",
+        role: initialData.role || "",
+        district: initialData.district || "",
+        locale: initialData.locale || "",
+        wildcard: initialData.wildcard || "",
+        image: initialData.image || "",
+        password: ""
     })
 
     //Change corresponding formData value
@@ -26,15 +27,21 @@ function CreateUserForm({ onSubmit }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="from create-user-form">
-            <section>
-                <label>ID:</label>
-                <input type="text" name="id" value={formData.id} onChange={handleChange} required/>
-            </section>
-            <section>
-                <label>Password:</label>
-                <input type="text" name="password" value={formData.password} onChange={handleChange} required/>
-            </section>
+        <form onSubmit={handleSubmit} className="form user-form">
+            {/*Only show id and password if in create mode*/}
+            {!isEdit && (
+                <>
+                    <section>
+                        <label>ID:</label>
+                        <input type="text" name="id" value={formData.id} onChange={handleChange} required/>
+                    </section>
+                    <section>
+                        <label>Password:</label>
+                        <input type="text" name="password" value={formData.password} onChange={handleChange} required/>
+                    </section>
+                </>
+            )}
+
             <section>
                 <label>First Name:</label>
                 <input type="text" name="fname" value={formData.fname} onChange={handleChange} required/>
@@ -63,10 +70,10 @@ function CreateUserForm({ onSubmit }) {
                 <label>image:</label>
                 <input type="text" name="image" value={formData.image} onChange={handleChange}/>
             </section>
-            <button className="button btn-create-user">Create</button>
-            <button className="button btn-cancel" onClick={() => window.history.back()}>Cancel</button>
+            <button type="submit" className="button btn-submit-user-form">{isEdit ? "Save" : "Create"}</button>
+            <button type="button" className="button btn-cancel" onClick={() => window.history.back()}>Cancel</button>
         </form>
     )
 }
 
-export default CreateUserForm
+export default UserForm

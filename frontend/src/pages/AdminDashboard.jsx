@@ -33,7 +33,7 @@ function AdminDashboard() {
 
     //Function to call when edit button is clicked on a user
     const editUser = (id) => {
-        console.log(`This will move to EditUser.jsx page for user_id: ${id}`)
+        navigate(`/edit_user/${id}`)
     }
 
     //Function to call when delete button is clicked on a user
@@ -53,7 +53,7 @@ function AdminDashboard() {
                     //Also remove user from userList so reload the UserList component
                     setUserList(prevUserList => prevUserList.filter(user => user.user_id !== id))
                 } else {
-                    setError(userData.error || 'Delete user failed.')
+                    setError(deleteData.error || 'Delete user failed.')
                 }
             } catch (err) {
                 setError('Could not connect to server.')
