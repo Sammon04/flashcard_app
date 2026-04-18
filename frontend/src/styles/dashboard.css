@@ -4,6 +4,8 @@
 
 .leftColumn {
     width: 20%;
+
+    padding: 10px;
 }
 
 .threeColumns>main {

@@ -5,7 +5,7 @@ function Leaderboard({userScores}) {
         <>
             <table>
                 <thead>
-                    <tr><th>name</th><th>score</th></tr>
+                    <tr><th>Name</th><th>Score</th></tr>
                 </thead>
                 <tbody>
                     {userScores.map((user) => (
