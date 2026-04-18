@@ -11,8 +11,8 @@ INSERT INTO user (user_id, password, score, Admin) VALUES
     (102, "$2y$10$O7Uttkbv6f48nkZVhlwfVeUlWSWe9utrJEtEyhg7Bd8Wh87zVaYkW", 0, FALSE),
     (103, "$2y$10$vUkH.Ne/RZGCg.Moh2i7TeFm1DYJozMaONwwU28Agmj2HNaDXWjI.", 0, FALSE);
 
-INSERT INTO user_info(info_user_id, fname, lname, role, district, locale, wildcard) VALUES
-    (100, "Raymond", "Didonato", "Some kind of Dev", "Redford 2", " maybe english", "not placeholder"),
-    (101, "Samuel", "Belanger", "Back-end Dev", "Redford", " probably english", "holderplace"),
-    (102, "Gabriel", "Ball", "Front-end Dev", "Somewhere", "definitely english", "place"),
-    (103, "Lohann", "spy_tf2", "Creative lead", "France", "french", "holder");
+INSERT INTO user_info(info_user_id, fname, lname, image, role, district, locale, wildcard) VALUES
+    (100, "Raymond", "Didonato", "backend/uploads/users/giraffe.png", "Some kind of Dev", "Redford 2", " maybe english", "Does not eat at chilis"),
+    (101, "Samuel", "Belanger", "backend/uploads/users/lizard.png", "Back-end Dev", "Redford", " probably english", "Plays geometry dash"),
+    (102, "Gabriel", "Ball", "backend/uploads/users/otter.png", "Front-end Dev", "Somewhere", "definitely english", "Doesn't like his senior design group"),
+    (103, "Lohann", "spy_tf2", "backend/uploads/users/toucan.png", "Creative lead", "France", "french", "Has a butterfly knife and a disguise kit");
