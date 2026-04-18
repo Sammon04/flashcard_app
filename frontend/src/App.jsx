@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 
+import RequireAuth from './components/RequireAuth'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Play from './pages/Play'
 import AdminDashboard from './pages/AdminDashboard'
-import RequireAuth from './components/RequireAuth'
+import CreateUser from './pages/CreateUser';
 
 import './App.css'
 import './styles/header.css'
@@ -19,24 +20,31 @@ function App() {
       {/*Home page/landing page*/}
       <Route path='/' element={<Login />} />
 
-      {/*Regular user dashboard page*/}
+      {/*(Reg user) dashboard page*/}
       <Route path='/dashboard' element={
         <RequireAuth>
           <Dashboard />
         </RequireAuth>
       } />
 
-      {/*Play screen for regular users*/}
+      {/*(Reg user) Play screen*/}
       <Route path='/play' element={
         <RequireAuth>
           <Play />
         </RequireAuth>
       } />
 
-      {/*Admin (hr) dashboard page*/}
+      {/*(Admin/HR) dashboard page*/}
       <Route path='/admin_dashboard' element={
         <RequireAuth adminOnly>
           <AdminDashboard />
+        </RequireAuth>
+      } />
+
+      {/*(Admin/HR) create user page*/}
+      <Route path='/create_user' element={
+        <RequireAuth adminOnly>
+          <CreateUser />
         </RequireAuth>
       } />
 

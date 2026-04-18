@@ -14,7 +14,7 @@ $district = $data['district'] ?? null;
 $locale = $data['locale'] ?? null;
 $wildcard = $data['wildcard'] ?? null;
 
-if ($id === null || $password === null || $fname === null || $lname === null) {
+if (empty($id) || empty($password) || empty($fname) || empty($lname)) {
     send_response(['error' => 'Missing user data'], 400);
 }
 
@@ -42,8 +42,6 @@ try {
     $db->commit();
 
     send_response(['success' => true]);
-
-
 } catch (Exception $e) {
     $db->rollback();
 
@@ -53,4 +51,3 @@ try {
 
     send_response(['error' => 'Database error'], 500);
 }
-
