@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { Session } from "../util/Session"
 import Question from './Question.jsx'
 
-const tags = ['role', 'district', 'locale', 'wildcard']
+const tags = ['fname', 'lname', 'role', 'district', 'locale', 'wildcard']
 const questionTexts = [
+    'What is this person\'s first name?',
+    'What is this person\'s last name?',
     'What is this person\'s role?',
     'What is this person\'s district?',
     'What is this person\'s primary language?',
@@ -60,7 +62,7 @@ function QuestionSet(props) {
                 const newCorrectAnswers = []
                 const newSelectedAnswers = []
 
-                for (let i = 0; i < 4; i++)
+                for (let i = 0; i < answerData.length; i++)
                 {
                     newSelectedAnswers.push({id: i, val: "-1"})
                     // Which answer should be the correct one?
