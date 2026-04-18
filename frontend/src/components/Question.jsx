@@ -1,12 +1,15 @@
 function Question(props) {
-    const handleChange = (event) => {
+    const handleClick = (event) => {
+        if (props.submitted) return
+
         const nextAnswers = props.selectedAnswers.map(answer => {
             if (answer.id != props.id) {
                 return answer;
             } else {
+                const val = event.target.id[event.target.id.length - 1]
                 return {
                     ...answer,
-                    val: event.target.value,
+                    val: val,
                 }
             }
         })
@@ -14,46 +17,54 @@ function Question(props) {
         props.setSelectedAnswers(nextAnswers)
     }
 
+    const selectedAnswer = props.selectedAnswers[props.id].val
+    const correctAnswer = props.correctAnswers[props.id]
+    const isCorrect = selectedAnswer == correctAnswer
+    const hasSubmitted = props.submitted
+    const classNames = ['', '', '', '']
+    let questionClassName = ''
+
+    if (hasSubmitted) {
+        questionClassName = isCorrect ? 'correct' : 'incorrect'
+        if (!isCorrect && selectedAnswer !== "-1") {
+            classNames[parseInt(selectedAnswer)] = 'incorrectAnswer'
+        }
+        classNames[parseInt(correctAnswer)] = 'correctAnswer'
+    } else {
+        classNames[0] = selectedAnswer === "0" ? 'selectedAnswer' : ''
+        classNames[1] = selectedAnswer === "1" ? 'selectedAnswer' : ''
+        classNames[2] = selectedAnswer === "2" ? 'selectedAnswer' : ''
+        classNames[3] = selectedAnswer === "3" ? 'selectedAnswer' : ''
+    }
+
     return(
-        <article>
+        <article className={questionClassName}>
             <h5>{props.question.text}</h5>
 
             <div className="answerGrid">
-                <div className="labelAndRadio">
-                    <label htmlFor={props.id + "answer1"}>
+                <button id={props.id + "answer0"}
+                    className={classNames[0]}
+                    onClick={handleClick}>
                         {props.question.answers[0]}
-                    </label>
-                    <input type="radio" name={props.id + "answer"} id={props.id + "answer1"} value="1"
-                        checked={props.selectedAnswers[props.id].val === "1"}
-                        onChange={handleChange}/>
-                </div>
+                </button>
 
-                <div className="labelAndRadio">
-                    <label htmlFor={props.id + "answer2"}>
+                <button id={props.id + "answer1"}
+                    className={classNames[1]}
+                    onClick={handleClick}>
                         {props.question.answers[1]}
-                    </label>
-                    <input type="radio" name={props.id + "answer"} id={props.id + "answer2"} value="2"
-                        checked={props.selectedAnswers[props.id].val === "2"}
-                        onChange={handleChange}/>
-                </div>
+                </button>
 
-                <div className="labelAndRadio">
-                    <label htmlFor={props.id + "answer3"}>
+                <button id={props.id + "answer2"}
+                    className={classNames[2]}
+                    onClick={handleClick}>
                         {props.question.answers[2]}
-                    </label>
-                    <input type="radio" name={props.id + "answer"} id={props.id + "answer3"} value="3"
-                        checked={props.selectedAnswers[props.id].val === "3"}
-                        onChange={handleChange}/>
-                </div>
+                </button>
 
-                <div className="labelAndRadio">
-                    <label htmlFor={props.id + "answer4"}>
+                <button id={props.id + "answer3"}
+                    className={classNames[3]}
+                    onClick={handleClick}>
                         {props.question.answers[3]}
-                    </label>
-                    <input type="radio" name={props.id + "answer"} id={props.id + "answer4"} value="4"
-                        checked={props.selectedAnswers[props.id].val === "4"}
-                        onChange={handleChange}/>
-                </div>
+                </button>
             </div>
 
         </article>

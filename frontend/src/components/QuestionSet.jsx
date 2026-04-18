@@ -14,6 +14,8 @@ const questionTexts = [
 
 function QuestionSet(props) {
     const [pending, setPending] = useState(false)
+    const [error, setError] = useState('')
+
     const [imageURL, setImageURL] = useState('')
     const [questions, setQuestions] = useState([])
     const [correctAnswers, setCorrectAnswers] = useState([])
@@ -39,12 +41,15 @@ function QuestionSet(props) {
                 // Select an id at random
                 let index = Math.floor(Math.random() * others.length)
                 setImageURL(others[index].image)
+                setError('')
                 return others[index].user_id
             } else {
                 console.log(users.error)
+                setError(users.error)
             }
         } catch (err) {
             console.log(err)
+            setError(err)
         }
     }
 
@@ -67,7 +72,7 @@ function QuestionSet(props) {
                     newSelectedAnswers.push({id: i, val: "-1"})
                     // Which answer should be the correct one?
                     let place = Math.floor(Math.random() * 4)
-                    newCorrectAnswers.push(place + 1)
+                    newCorrectAnswers.push(place)
                     const question = []
 
                     // Add the answers to the question
@@ -89,11 +94,14 @@ function QuestionSet(props) {
                 setQuestions(newQuestions)
                 setCorrectAnswers(newCorrectAnswers)
                 setSelectedAnswers(newSelectedAnswers)
+                setError('')
             } else {
                 console.log(answerData.error)
+                setError(answerData.error)
             }
         } catch (err) {
             console.log(err)
+            setError(err)
         }
 
         setPending(false)
@@ -115,7 +123,7 @@ function QuestionSet(props) {
                 body: JSON.stringify({id: curUser.user_id, score: correct}) // assuming 1 point per question
             })
         } catch (err) {
-            console.log(err)
+            setError(err)
         }
     }
 
@@ -125,7 +133,7 @@ function QuestionSet(props) {
         setSubmitted(false)
     }
 
-    if (!questions.length && !pending) {
+    if (!questions.length && !pending && !error) {
         fetchAnswerSet();
     }
 
@@ -134,17 +142,17 @@ function QuestionSet(props) {
     const questionsJSX = []
     questions.forEach((element) => {
         questionsJSX.push(<Question question={element} key={count} id={count}
-        selectedAnswers={selectedAnswers} setSelectedAnswers={setSelectedAnswers}/>)
+        selectedAnswers={selectedAnswers} setSelectedAnswers={setSelectedAnswers}
+        correctAnswers={correctAnswers} submitted={submitted}/>)
         count++
     })
-    
-    const submitDisabled = 'disabled';
+
     return(
         <section className='questionSet'>
             <div className='imgDiv'><img src="../../favicon.png"></img></div>
             {questionsJSX}
             <div className='actionsDiv'>
-                <button onClick={handleSkip}>Skip</button>
+                <button onClick={handleSkip}>{submitted ? 'Next Person' : 'Skip'}</button>
                 <button onClick={handleSubmit} disabled={submitted} >Submit</button>
             </div>
         </section>

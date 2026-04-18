@@ -17,30 +17,44 @@
 
 .questionSet article {
     padding: 10px;
+    margin-bottom: 2px;
 }
+
+.questionSet article.correct {
+    border-left: 2px solid greenyellow;
+    background-color: #adff2f30;
+}
+
+.questionSet article.incorrect {
+    border-left: 2px solid red;
+    background-color: #ff000030;
+}
+
 
 .questionSet h5 {
     margin-top: 5px;
     margin-bottom: 5px;
 
     text-decoration: underline;
+    font-size: large;
 }
 
 .questionSet .answerGrid {
-    
     display: grid;
-    grid-template-columns: 40% 40%;
-    column-gap: 20%;
+    grid-template-columns: 45% 45%;
+    column-gap: 10%;
 }
 
-.questionSet .labelAndRadio {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.questionSet button.selectedAnswer {
+    background-color: lightgrey;
 }
 
-.questionSet label {
-    align-content: center;
+.questionSet button.correctAnswer {
+    background-color: greenyellow;
+}
+
+.questionSet button.incorrectAnswer {
+    background-color: red;
 }
 
 .questionSet .actionsDiv {
