@@ -47,9 +47,28 @@ h1 {
     color:white;
 }
 
+.threeColumns {
+    display: flex;
+}
+
+.leftColumn, .rightColumn {
+    width: 20%;
+    height: 100%;
+    padding: 10px;
+}
+
 main {
     margin: 10px;
 }
+
+.threeColumns>main {
+    width: 60%;
+
+    margin: 0px;
+    padding: 10px;
+}
+
+
 
 table {
 
@@ -77,4 +96,9 @@ tr:nth-child(even){
 
 th, td {
     padding: 10px;
+}
+
+.fakeAd {
+    width: 100%;
+    height: 100%;
 }

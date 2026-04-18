@@ -1,20 +1,3 @@
-.threeColumns {
-    display: flex;
-}
-
-.leftColumn {
-    width: 20%;
-
-    padding: 10px;
-}
-
-.threeColumns>main {
-    width: 60%;
-
-    margin: 0px;
-    padding: 10px;
-}
-
 .youRow {
     font-weight: bold;
 }

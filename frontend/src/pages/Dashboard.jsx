@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Session } from "../util/Session"
 import Header from '../components/Header'
 import Leaderboard from "../components/Leaderboard"
+import FakeAd from '../components/FakeAd'
 
 function Dashboard() {
     const navigate = useNavigate()
@@ -83,6 +84,9 @@ function Dashboard() {
                 <main>
                     <button onClick={() => {window.location.href="/play"}}>Play!</button>
                 </main>
+                <div className='rightColumn'>
+                    <FakeAd/>
+                </div>
             </div>
         </>
     )
