@@ -1,0 +1,14 @@
+.threeColumns {
+    display: flex;
+}
+
+.leftColumn {
+    width: 20%;
+}
+
+.threeColumns>main {
+    width: 60%;
+
+    margin: 0px;
+    padding: 10px;
+}
