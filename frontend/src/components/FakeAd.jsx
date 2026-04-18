@@ -9,6 +9,7 @@ function FakeAd() {
         <>
             <h3>Fake Ad</h3>
             <img className="fakeAd" src={selectedString}/>
+            <i>click to give us money</i>
         </>
     )
 }
