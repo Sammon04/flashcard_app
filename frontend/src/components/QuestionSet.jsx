@@ -15,15 +15,7 @@ function QuestionSet(props) {
     const [imageURL, setImageURL] = useState('')
     const [questions, setQuestions] = useState([])
     const [correctAnswers, setCorrectAnswers] = useState([])
-
-    // Here we assume a fixed length for the question set
-    const [selectedAnswers, setSelectedAnswers] = useState([
-        {id: 0, val:"-1"},
-        {id: 1, val:"-1"},
-        {id: 2, val:"-1"},
-        {id: 3, val:"-1"},
-        {id: 4, val:"-1"},
-    ])
+    const [selectedAnswers, setSelectedAnswers] = useState([])
     const [submitted, setSubmitted] = useState(false)
 
     const curUser = Session.getCurUser()
@@ -66,9 +58,11 @@ function QuestionSet(props) {
                 console.log(answerData)
                 const newQuestions = []
                 const newCorrectAnswers = []
+                const newSelectedAnswers = []
 
                 for (let i = 0; i < 4; i++)
                 {
+                    newSelectedAnswers.push({id: i, val: "-1"})
                     // Which answer should be the correct one?
                     let place = Math.floor(Math.random() * 4)
                     newCorrectAnswers.push(place + 1)
@@ -92,6 +86,7 @@ function QuestionSet(props) {
 
                 setQuestions(newQuestions)
                 setCorrectAnswers(newCorrectAnswers)
+                setSelectedAnswers(newSelectedAnswers)
             } else {
                 console.log(answerData.error)
             }
@@ -104,18 +99,18 @@ function QuestionSet(props) {
 
     const handleSubmit = async () => {
         setSubmitted(true)
-        let incorrect = 0
+        let correct = 0
         for (let i = 0; i < correctAnswers.length; i++) {
-            incorrect += correctAnswers[i] != selectedAnswers[i].val
+            correct += correctAnswers[i] == selectedAnswers[i].val
         }
 
-        if (incorrect) return
+        if (!correct) return
 
         try {
             const response = await fetch(`http://localhost/flashcard_app/backend/api/users/update_score.php`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({id: curUser.user_id, score: 4}) // assuming 1 point per question
+                body: JSON.stringify({id: curUser.user_id, score: correct}) // assuming 1 point per question
             })
         } catch (err) {
             console.log(err)
