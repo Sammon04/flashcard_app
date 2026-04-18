@@ -37,9 +37,28 @@ function AdminDashboard() {
     }
 
     //Function to call when delete button is clicked on a user
-    const deleteUser = (id) => {
+    const deleteUser = async (id) => {
+        //Confirm first
         if (window.confirm("Are you sure you want to delete this user?")) {
-            console.log(`This will call delete.php for user_id: ${id}`)
+            //Try deleting user
+            try {
+                const deleteResponse = await fetch(`${BASE_URL}/users/delete.php`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: JSON.stringify({id})
+                })
+                const deleteData = await deleteResponse.json()
+
+                if (deleteData.success) {
+                    //Also remove user from userList so reload the UserList component
+                    setUserList(prevUserList => prevUserList.filter(user => user.user_id !== id))
+                } else {
+                    setError(userData.error || 'Delete user failed.')
+                }
+            } catch (err) {
+                setError('Could not connect to server.')
+                console.error("Delete error: ", err)
+            }
         }
     }
 
