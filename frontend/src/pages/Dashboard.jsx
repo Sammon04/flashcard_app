@@ -17,15 +17,47 @@ function Dashboard() {
 
             const answerData = await response.json()
             if (!answerData.error) {
-                // var k = 0
-                // const userScores = answerData.map(
-                //     (user) => {
-                //         k = k + 1
-                //         // return [name=user[0], score=user[1]]
-                //     }
-                // )
-                // console.log(userScores)
+                if (answerData.length >= 10) {
+                    if (answerData.length > 10) {
+                        setUserScores(answerData.slice(0, 10))
+                    }
+                    
+                    var userIn = false
+
+                    for (element in answerData){
+                        if (element[0] == curUser.user_id){
+                            userIn == true
+                            break
+                        }
+                    };
+
+                    if (!userIn){
+
+                        answerData.map(
+                            (user) => {
+                                user.push(false)
+                            }
+                        )
+
+                        answerData.push(curUser.user_id, curUser.fname + " " + curUser.lname, curUser.score, true)
+
+                        setUserScores(answerData)
+                        return
+                    }
+
+                }
+                
+                answerData.forEach(
+                        (user) => {
+                            if (user[0] == curUser.user_id){
+                                user.push(true)
+                            }
+                            user.push(false)
+                        }
+                    )
+
                 setUserScores(answerData)
+
             } else {
                 console.log(answerData.error)
             }
@@ -38,6 +70,7 @@ function Dashboard() {
     if (!userScores.length && !pending) {
         getUserScores()
     }
+
 
     return (
         <>

@@ -6,11 +6,12 @@ $users = [];
 
 try {
     
-    $sql = 'SELECT CONCAT(ui.fname, " ", ui.lname) as name, u.score  
+    $sql = 'SELECT u.user_id, CONCAT(ui.fname, " ", ui.lname) as name, u.score  
             FROM user AS u 
             JOIN user_info AS ui 
             ON u.user_id = ui.info_user_id 
-            ORDER BY u.score DESC';
+            ORDER BY u.score DESC
+            LIMIT 10';
 
     $query = $db->prepare($sql);
     $query->execute();

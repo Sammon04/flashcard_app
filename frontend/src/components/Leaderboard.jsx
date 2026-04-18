@@ -1,8 +1,5 @@
 
 function Leaderboard({userScores}) {
-    console.log(userScores)
-
-    var k = 0
 
     return (
         <>
@@ -12,7 +9,10 @@ function Leaderboard({userScores}) {
                 </thead>
                 <tbody>
                     {userScores.map((user) => (
-                            <tr key={k++}><td>{user[0]}</td><td>{user[1]}</td></tr>
+                            
+                            <tr key={user[0]} className={user[3] ? "youRow" : ""}>
+                                <td>{user[1]}</td><td>{user[2]}</td>
+                            </tr>
                         ))}
                 </tbody>
             </table>
