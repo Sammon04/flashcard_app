@@ -39,19 +39,24 @@ function QuestionSet(props) {
                 }
 
                 // Select an id at random
-                let index = Math.floor(Math.random() * others.length)
-                console.log(others[index])
-                setImageURL('http://localhost/flashcard_app/' + others[index].image)
-                setError('')
-                return others[index].user_id
+                const index = Math.floor(Math.random() * others.length)
+                
+                const selectedImage = others[index].image
+                if (!selectedImage) {
+                    setImageURL('')
+                    setError(`No image found for ${others[index].fname} ${others[index].lname}`)
+                } else {
+                    setImageURL('http://localhost/flashcard_app/' + selectedImage)
+                    setError('')
+                    return others[index].user_id
+                }
             } else {
-                console.log(users.error)
                 setError(users.error)
             }
         } catch (err) {
-            console.log(err)
             setError(err)
         }
+        return -1
     }
 
     // Sets the answer set to that of a random user and three others
@@ -59,6 +64,10 @@ function QuestionSet(props) {
         setPending(true)
         try {
             const id = await getRandomUser()
+            if (id === -1) {
+                setPending(false)
+                return
+            }
             const response = await fetch(`http://localhost/flashcard_app/backend/api/users/get_answers.php?id=${id}`)
 
             const answerData = await response.json()
@@ -132,6 +141,7 @@ function QuestionSet(props) {
         setQuestions([])
         setPending(false)
         setSubmitted(false)
+        setError('')
     }
 
     if (!questions.length && !pending && !error) {
@@ -153,11 +163,12 @@ function QuestionSet(props) {
             <div className='imgDiv'>
                 <img src={imageURL || 'http://localhost/flashcard_app/backend/uploads/users/human.png'} />
             </div>
+            {error && <p className='error-message'>{error}</p>}
 
             {questionsJSX}
             <div className='actionsDiv'>
-                <button onClick={handleSkip}>{submitted ? 'Next Person' : 'Skip'}</button>
-                <button onClick={handleSubmit} disabled={submitted} >Submit</button>
+                <button onClick={handleSkip}>{submitted || error ? 'Next Person' : 'Skip'}</button>
+                <button onClick={handleSubmit} disabled={submitted || error} >Submit</button>
             </div>
         </section>
     )
