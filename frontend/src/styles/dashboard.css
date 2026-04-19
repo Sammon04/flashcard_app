@@ -14,7 +14,7 @@ table {
     margin-top: 25px;
     padding: 10px;
 
-    background-color: lightgrey;
+    background-color: var(--secondary-color);
 
     border: 2px solid var(--accent-color);
     box-shadow: var(--shadow);

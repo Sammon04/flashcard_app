@@ -23,12 +23,6 @@
     margin: auto;
     border-radius: 100%;
     box-shadow: var(--shadow);
-    transform-origin: top;
-    transform: scale(1);
-    transition: 0.3s;}
-
-.questionSet img:hover {
-    transform: scale(1.5);
 }
 
 .questionSet article {
@@ -38,12 +32,12 @@
 
 .questionSet article.correct {
     border-left: 2px solid greenyellow;
-    background-color: #adff2f30;
+    background-color: hsla(84, 100%, 50%, 0.246);
 }
 
 .questionSet article.incorrect {
     border-left: 2px solid red;
-    background-color: #ff000030;
+    background-color: hsla(0, 100%, 50%, 0.188);
 }
 
 
@@ -62,7 +56,8 @@
 }
 
 .questionSet button.selectedAnswer {
-    background-color: lightgrey;
+    background-color: var(--inverse-text-color);
+    color: var(--text-color);
 }
 
 .questionSet button.correctAnswer {
@@ -96,4 +91,16 @@
         width: 100%;
     }
     
+}
+
+.questionSet button:hover{
+
+    background-color: white;
+
+    color: var(--text-color);
+}
+
+.incorrect button, .correct button {
+
+    pointer-events: none;
 }
