@@ -42,13 +42,6 @@ function App() {
         </RequireAuth>
       } />
 
-      {/*(Admin/HR) create user page*/}
-      {/* <Route path='/create_user' element={
-        <RequireAuth adminOnly>
-          <CreateUser />
-        </RequireAuth>
-      } /> */}
-
       {/*(Admin/HR) edit user page*/}
       <Route path='/edit_user/:id' element={
         <RequireAuth adminOnly>

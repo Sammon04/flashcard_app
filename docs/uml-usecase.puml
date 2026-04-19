@@ -7,43 +7,35 @@ actor User
 actor UserAdmin
 actor Server
 
-UserAdmin .> User : <<extends>>
-
 rectangle FlashcardWebApp {
     folder NormalUser {
-        User -- (Fetch Question)
-        (Fetch Question) -- Server
-        (Fetch Question) <. (Answer Question) : <<extends>>
-        (Skip Question) .> (Fetch Question) : <<extends>>
-        (Answer Question) -- Server
-        (Skip Question) -- Server
-        Note top of (Skip Question): Skip and come back later. Doesn't affect score (?)
-        (Answer Question) .> (Update Scores) : <<includes>>
+        User -- (Login)
+        (Login) -- Server
+        User -- (Fetch Question Set)
+        (Fetch Question Set) -- Server
+        (Fetch Question Set) <. (Answer Questions) : <<extends>>
+        (Skip Questions) .> (Fetch Question Set) : <<extends>>
+        (Answer Questions) .> (Update Scores) : <<includes>>
         (Update Scores) -- Server
 
-        User -- (View Personal Score)
-        (View Personal Score) -- Server
+        User --- (View Score Leaderboard)
+        (View Score Leaderboard) -- Server
     }
 
     folder AdminUser {
+        UserAdmin -- (Login)
+
         UserAdmin -- (Add User)
         (Add User) -- Server
+
+        UserAdmin -- (View User Info)
+        (View User Info) -- Server
+
+        UserAdmin -- (Update User Info)
+        (Update User Info) -- Server
+
         UserAdmin -- (Remove User)
         (Remove User) -- Server
-
-        UserAdmin -- (Add Card)
-        (Add Card) -- Server
-        UserAdmin -- (Remove Card)
-        (Remove Card) -- Server
-
-        (Remove User) .> (Remove Card) : <<includes>>
-
-        UserAdmin -- (View Users Score)
-        (View Users Score) -- Server
-
-        UserAdmin -- (Set Questions per Day)
-        (Set Questions per Day) -- Server
-        Note top of (Set Questions per Day): This only applies for random\nassignment - not spaced repetition
     }
 }
 
