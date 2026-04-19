@@ -61,7 +61,7 @@ function EditUser() {
     return (
         <>
             <Header user={Session.getCurUser()} />
-            <h1>Edit User: {id}</h1>
+            <h1>Admin Dashboard</h1>
             <main>
                 {error && <p className='error-message'>{error}</p>}
                 {/*Render form once we got the user's data*/}

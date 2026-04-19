@@ -5,7 +5,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Play from './pages/Play'
 import AdminDashboard from './pages/AdminDashboard'
-import CreateUser from './pages/CreateUser';
+//import CreateUser from './pages/CreateUser';
 
 import './App.css'
 import './styles/header.css'
@@ -43,11 +43,11 @@ function App() {
       } />
 
       {/*(Admin/HR) create user page*/}
-      <Route path='/create_user' element={
+      {/* <Route path='/create_user' element={
         <RequireAuth adminOnly>
           <CreateUser />
         </RequireAuth>
-      } />
+      } /> */}
 
       {/*(Admin/HR) edit user page*/}
       <Route path='/edit_user/:id' element={
