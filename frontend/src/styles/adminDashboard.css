@@ -1,0 +1,23 @@
+.user-form {
+    margin: 10px;
+}
+
+.user-form input {
+    width: 60%;
+
+    margin-bottom: 5px;
+}
+
+.user-form label {
+    width: 40%;
+}
+
+.user-form button {
+    margin: 5px;
+}
+
+.user-list button {
+    min-width: 60px;
+
+    margin: 5px;
+}

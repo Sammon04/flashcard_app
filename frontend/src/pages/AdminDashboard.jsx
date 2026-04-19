@@ -5,6 +5,7 @@ import UserList from "../components/UserList"
 import { BASE_URL } from '../config'
 import { useNavigate } from "react-router-dom"
 import UserForm from "../components/UserForm"
+import FakeAd from "../components/FakeAd"
 
 function AdminDashboard() {
     const [userList, setUserList] = useState([])
@@ -96,22 +97,25 @@ function AdminDashboard() {
         <>
             <Header user={curUser} />
             <h1>Admin Dashboard</h1>
-            <main className="admin-dashboard-container">
-                {/*Show any error message from the server*/}
-                {error && <p className='error-message'>{error}</p>}
-
-                <section>
+            <div className="threeColumns">
+                <div className="leftColumn">
                     <UserForm onSubmit={handleCreateUser}/>
-                </section>
-                <section>
-                    {/*Show list if there are users to show, otherwise show empty message*/}
-                    {(userList.length > 0) ? (
-                        <UserList userList={userList} onEdit={editUser} onDelete={deleteUser}/>
-                    ) : (
-                        <p className="empty-message">No users found in the system.</p>
-                    )}
-                </section>
-            </main>
+                </div>
+                <main className="admin-dashboard-container">
+                    {/*Show any error message from the server*/}
+                    {error && <p className='error-message'>{error}</p>}
+
+                    <section>
+                        {/*Show list if there are users to show, otherwise show empty message*/}
+                        {(userList.length > 0) ? (
+                            <UserList userList={userList} onEdit={editUser} onDelete={deleteUser}/>
+                        ) : (
+                            <p className="empty-message">No users found in the system.</p>
+                        )}
+                    </section>
+                </main>
+                <div className="rightColumn"><FakeAd/></div>
+            </div>
         </>
     )
 }

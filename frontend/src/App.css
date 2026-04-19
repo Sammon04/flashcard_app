@@ -68,7 +68,12 @@ main {
     padding: 10px;
 }
 
+form section{
+    display: flex;
+    justify-content: space-between;
 
+    text-align: left;
+}
 
 table {
 
