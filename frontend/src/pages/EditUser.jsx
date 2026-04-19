@@ -4,6 +4,7 @@ import Header from "../components/Header"
 import { Session } from "../util/Session"
 import UserForm from "../components/UserForm"
 import { BASE_URL } from "../config"
+import ChangePassword from "../components/ChangePassword"
 
 function EditUser() {
     const { id } = useParams() //Get id from url
@@ -61,16 +62,18 @@ function EditUser() {
     return (
         <>
             <Header user={Session.getCurUser()} headerTitle={"Admin Dashboard"} />
-            <h1></h1>
             <main>
                 {error && <p className='error-message'>{error}</p>}
                 {/*Render form once we got the user's data*/}
                 {userData && (
-                    <UserForm
-                        onSubmit={handleUpdateUser}
-                        initialData={userData}
-                        isEdit={true}
-                    />
+                    <>
+                        <UserForm
+                            onSubmit={handleUpdateUser}
+                            initialData={userData}
+                            isEdit={true}
+                        />
+                        <ChangePassword user_id={id} />
+                    </>
                 )}
             </main>
         </>
