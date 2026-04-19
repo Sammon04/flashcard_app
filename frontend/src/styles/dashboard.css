@@ -9,3 +9,23 @@ table {
 .playButtons button {
     margin: 5px;
 }
+
+.tutorial {
+    margin-top: 25px;
+    padding: 10px;
+
+    background-color: lightgrey;
+
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--shadow);
+
+    text-align: left;
+}
+
+.tutorial h3 {
+    margin-top: 0px;
+}
+
+.tutorial p {
+    margin-bottom: 5px;
+}
