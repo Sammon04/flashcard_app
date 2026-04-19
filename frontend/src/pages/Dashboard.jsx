@@ -4,6 +4,7 @@ import { Session } from "../util/Session"
 import Header from '../components/Header'
 import Leaderboard from "../components/Leaderboard"
 import FakeAd from '../components/FakeAd'
+import Tutorial from '../components/Tutorial'
 
 function Dashboard() {
     const navigate = useNavigate()
@@ -86,7 +87,7 @@ function Dashboard() {
                     <button onClick={() => {
                         window.location.href="/play?count=5"
                     }}>Play a Short Quiz!</button>
-                    <p>here there would be a tutorial on how to play</p>
+                    <Tutorial />
                 </main>
                 <div className='rightColumn'>
                     <FakeAd/>

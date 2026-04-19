@@ -3,6 +3,7 @@ function Leaderboard({userScores}) {
 
     return (
         <>
+        <h3>Leaderboard</h3>
             <table>
                 <thead>
                     <tr><th>Name</th><th>Score</th></tr>
