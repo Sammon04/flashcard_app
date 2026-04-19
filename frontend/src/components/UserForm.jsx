@@ -47,7 +47,7 @@ function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
     return (
         <>
             <h3>{(isEdit) ? `Editing User: ${formData.id}` : "Create User"}</h3>
-            <form onSubmit={handleSubmit} className="form user-form">
+            <form onSubmit={handleSubmit} className={"form " + ((isEdit) ? "edit-form" : "create-form")}>
                 {/*Only show id and password if in create mode*/}
                 {!isEdit && (
                     <>

@@ -5,3 +5,7 @@ table {
 .youRow {
     font-weight: bold;
 }
+
+.playButtons button {
+    margin: 5px;
+}
