@@ -10,9 +10,9 @@ if ($id === null) {
 
 try {
 
-    $sql = "SELECT fname, lname, role, department, location, wildcard 
+    $sql = 'SELECT CONCAT(fname, " ", lname) as name, role, department, location, wildcard 
             FROM user_info 
-            WHERE info_user_id = ?";
+            WHERE info_user_id = ?';
 
     $query = $db->prepare($sql);
     $query->bind_param("i", $id);
@@ -28,19 +28,32 @@ try {
     send_response(['error' => 'Database error'], 500);
 }
 
+
 $answers = [];
 
 try {
 
     foreach ($cur_user as $key => $value) {
 
-        $sql = "SELECT DISTINCT $key 
-                FROM user_info WHERE 
-                info_user_id != ?
-                AND $key != ? 
-                ORDER BY RAND() 
-                LIMIT 3
-            ";
+        if ($key == "name"){
+            $sql = 'SELECT CONCAT(fname, " ", lname) as name
+                    FROM user_info WHERE 
+                    info_user_id != ?
+                    AND CONCAT(fname, " ", lname) != ? 
+                    ORDER BY RAND() 
+                    LIMIT 3
+                ';
+            
+        } else {
+            $sql = "SELECT DISTINCT $key 
+                    FROM user_info WHERE 
+                    info_user_id != ?
+                    AND $key != ? 
+                    ORDER BY RAND() 
+                    LIMIT 3
+                ";
+        }
+        
 
         $query = $db->prepare($sql);
         $query->bind_param("is", $id, $value);
@@ -66,6 +79,6 @@ try {
     echo json_encode($answers);
 
 } catch (Exception $e) {
-    send_response(['error' => 'Database error'], 500);
+    send_response(['error' => 'Database error ' . $e], 500);
 }
 

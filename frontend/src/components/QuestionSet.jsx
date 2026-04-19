@@ -2,10 +2,9 @@ import { useState } from 'react'
 import { Session } from "../util/Session"
 import Question from './Question.jsx'
 
-const tags = ['fname', 'lname', 'role', 'department', 'location', 'wildcard']
+const tags = ['name', 'role', 'department', 'location', 'wildcard']
 const questionTexts = [
-    'What is this person\'s first name?',
-    'What is this person\'s last name?',
+    'What is this person\'s name?',
     'What is this person\'s role?',
     'What is this person\'s department?',
     'What is this person\'s location within the company?',
@@ -44,7 +43,7 @@ function QuestionSet(props) {
                 const selectedImage = others[index].image
                 if (!selectedImage) {
                     setImageURL('')
-                    setError(`No image found for ${others[index].fname} ${others[index].lname}`)
+                    setError(`No image found for ${others[index].name}`)
                 } else {
                     setImageURL('http://localhost/flashcard_app/' + selectedImage)
                     setError('')
@@ -71,6 +70,8 @@ function QuestionSet(props) {
             const response = await fetch(`http://localhost/flashcard_app/backend/api/users/get_answers.php?id=${id}`)
 
             const answerData = await response.json()
+            console.log(answerData)
+
             if (!answerData.error) {
                 console.log(answerData)
                 const newQuestions = []
