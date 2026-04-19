@@ -17,7 +17,7 @@ CREATE TABLE user_info (
     image VARCHAR(50),
     role VARCHAR(30),
     department VARCHAR(30),
-    desk_num VARCHAR(20),
+    location VARCHAR(20),
     wildcard VARCHAR(100),
 
     CONSTRAINT fk_info_user_id

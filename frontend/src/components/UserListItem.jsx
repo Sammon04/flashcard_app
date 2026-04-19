@@ -5,7 +5,7 @@ function UserListItem({ user, onEdit, onDelete }) {
             <td>{user.lname}, {user.fname}</td>
             <td>{user.role}</td>
             <td>{user.department}</td>
-            <td>{user.desk_num}</td>
+            <td>{user.location}</td>
             <td>{user.score}</td>
             <td>
                 <button className="button btn-edit-user" onClick={() => onEdit(user.user_id)}>Edit</button>

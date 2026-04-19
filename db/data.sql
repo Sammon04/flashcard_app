@@ -11,8 +11,8 @@ INSERT INTO user (user_id, password, score, Admin) VALUES
     (102, "$2y$10$O7Uttkbv6f48nkZVhlwfVeUlWSWe9utrJEtEyhg7Bd8Wh87zVaYkW", 0, FALSE),
     (103, "$2y$10$vUkH.Ne/RZGCg.Moh2i7TeFm1DYJozMaONwwU28Agmj2HNaDXWjI.", 0, FALSE);
 
-INSERT INTO user_info(info_user_id, fname, lname, image, role, department, desk_num, wildcard) VALUES
-    (100, "Raymond", "Didonato", "backend/uploads/users/giraffe.png", "Some kind of Dev", "Development", "1984", "Does not eat at chilis"),
-    (101, "Samuel", "Belanger", "backend/uploads/users/lizard.png", "Back-end Dev", "Department of snacks", "420", "Plays geometry dash"),
-    (102, "Gabriel", "Ball", "backend/uploads/users/otter.png", "Front-end Dev", "HR", "67", "Doesn't like his senior design group"),
-    (103, "Lohann", "spy_tf2", "backend/uploads/users/toucan.png", "Creative lead", "France department", "7749", "Has a butterfly knife and a disguise kit");
+INSERT INTO user_info(info_user_id, fname, lname, image, role, department, location, wildcard) VALUES
+    (100, "Raymond", "Didonato", "backend/uploads/users/giraffe.png", "Some kind of Dev", "Development", "Desk 1984", "Does not eat at chilis"),
+    (101, "Samuel", "Belanger", "backend/uploads/users/lizard.png", "Back-end Dev", "Department of snacks", "Building Alpha, 39th floor", "Plays geometry dash"),
+    (102, "Gabriel", "Ball", "backend/uploads/users/otter.png", "Front-end Dev", "HR", "Desk -1", "Doesn't like his senior design group"),
+    (103, "Lohann", "spy_tf2", "backend/uploads/users/toucan.png", "Creative lead", "Department of the sinkhole", "The sinkhole", "Has a butterfly knife and a disguise kit");

@@ -11,7 +11,7 @@ function UserList({ userList, onEdit, onDelete }) {
                         <th>Name</th>
                         <th>Role</th>
                         <th>department</th>
-                        <th>desk_num</th>
+                        <th>location</th>
                         <th>Score</th>
                         {/*Buttons like Edit or Delete*/}
                         <th>Actions</th>

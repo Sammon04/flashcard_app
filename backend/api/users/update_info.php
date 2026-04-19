@@ -14,7 +14,7 @@ $fields = [];
 $values = [];
 $types = '';
 
-$allowed = ['fname', 'lname', 'image', 'role', 'department', 'desk_num', 'wildcard'];
+$allowed = ['fname', 'lname', 'image', 'role', 'department', 'location', 'wildcard'];
 
 foreach ($data as $key => $value) {
     if ($key === 'id') continue;
