@@ -85,9 +85,7 @@ function Dashboard() {
                 <main>
                     <div className='playButtons'>
                         <button onClick={() => {window.location.href="/play"}}>Play the Full Quiz!</button>
-                        <button onClick={() => {
-                            window.location.href="/play?count=5"
-                        }}>Play a Short Quiz!</button>
+                        <button onClick={() => {window.location.href="/play?count=5"}}>Play a Short Quiz!</button>
                     </div>
                     <Tutorial />
                 </main>

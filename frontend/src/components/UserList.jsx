@@ -10,8 +10,8 @@ function UserList({ userList, onEdit, onDelete }) {
                         {/*Show limited information here. Full information will be on edit page*/}
                         <th>Name</th>
                         <th>Role</th>
-                        <th>department</th>
-                        <th>location</th>
+                        <th>Department</th>
+                        <th>Location</th>
                         <th>Score</th>
                         {/*Buttons like Edit or Delete*/}
                         <th>Actions</th>

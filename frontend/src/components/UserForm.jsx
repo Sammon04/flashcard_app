@@ -75,11 +75,11 @@ function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
                     <input type="text" name="role" value={formData.role} onChange={handleChange}/>
                 </section>
                 <section>
-                    <label>department:</label>
+                    <label>Department:</label>
                     <input type="text" name="department" value={formData.department} onChange={handleChange}/>
                 </section>
                 <section>
-                    <label>location:</label>
+                    <label>Location:</label>
                     <input type="text" name="location" value={formData.location} onChange={handleChange}/>
                 </section>
                 <section>
@@ -87,7 +87,7 @@ function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
                     <input type="text" name="wildcard" value={formData.wildcard} onChange={handleChange}/>
                 </section>
                 <section>
-                    <label>image:</label>
+                    <label>Image:</label>
                     <input type="text" name="image" value={formData.image} onChange={handleChange}/>
                 </section>
                 <button type="submit" className="button btn-submit-user-form">{(isEdit) ? "Save" : "Create"}</button>

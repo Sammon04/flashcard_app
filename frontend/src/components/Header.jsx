@@ -6,7 +6,7 @@ function Header({ user, headerTitle }) {
     var additionalNavButtons = ""
     if (user.admin) {
         additionalNavButtons = <div>
-            <button onClick={() => navigate("/dashboard")}>Player Dashboard</button>
+            <button onClick={() => navigate("/dashboard")}>User Dashboard</button>
             <button onClick={() => navigate("/admin_dashboard")}>Admin Dashboard</button>
         </div>
     }

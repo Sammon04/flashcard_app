@@ -8,7 +8,7 @@ const questionTexts = [
     'What is this person\'s role?',
     'What is this person\'s department?',
     'What is this person\'s location within the company?',
-    'Which of these is an interesting fact about this person?',
+    'Which of these interesting facts is about this person?',
 ]
 
 function QuestionSet(props) {

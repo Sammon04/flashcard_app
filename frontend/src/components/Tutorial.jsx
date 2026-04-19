@@ -14,7 +14,7 @@ function Tutorial() {
                 <li>What is this person's role</li>
                 <li>What is this person's department?</li>
                 <li>What is this person's location within the company?</li>
-                <li>Which of these is an interesting fact about this person?</li>
+                <li>Which of these interesting facts is about this person?</li>
             </ul>
             <p>
                 Once you've selected your answers for the presented colleague and clicked "Check Answers", you will
