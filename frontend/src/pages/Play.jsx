@@ -8,6 +8,9 @@ function Play() {
 
     return (
         <>
+            <header>
+                <h1>Who is that person ?</h1>
+            </header>
             <main>
                 <QuestionSet userID={curUser}/>
                 <br/>
