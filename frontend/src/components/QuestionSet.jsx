@@ -59,9 +59,14 @@ function QuestionSet(props) {
                     others[randomIndex], others[currentIndex]];
                 }
 
+                const params = new URLSearchParams(document.location.search)
+                const count = parseInt(params.get("count"))
+                // No need to clamp count, slice does so already
+                const sliced = others.slice(0, count)
+
                 // Update our cache
-                setUserList(others)
-                return others
+                setUserList(count ? sliced : others)
+                return count ? sliced : others
             } else {
                 setError(users.error)
             }
