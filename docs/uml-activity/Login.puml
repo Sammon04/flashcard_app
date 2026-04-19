@@ -1,0 +1,20 @@
+@startuml LoginActivity
+
+title Login
+(*) --> "User enters their credentials"
+--> if "Credentials Valid?" then
+    -->[true] "Set User Info to Selected User"
+    --> if "User is admin?" then
+        -->[true] "Load admin dashboard"
+        --> (*)
+    else
+        -->[false] "Load dashboard"
+        --> (*)
+    endif
+else
+    -->[false] "Clear Entered Fields"
+    --> "Display Login Error"
+    --> (*)
+endif
+
+@enduml

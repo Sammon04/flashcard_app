@@ -1,0 +1,31 @@
+@startuml AdminActivity
+title "Admin Dashboard"
+
+(*) --> if "User is admin" then
+    -->[true] "List all users and their info" as list_users
+    --> "Display form to add user" as display_form
+    -r-> if "Form is submitted" as form_submitted then
+        --> if "Inputs are valid" as form_valid then
+            -->[true] "Add/Update User"
+            --> ===RELOAD_PAGE===
+        else
+            -->[false] "Warn about invalid inputs"
+            --> display_form
+        endif
+    endif
+    display_form --> if "Delete Button is clicked" then
+        --> "Remove the user\nfrom the database"
+        --> ===RELOAD_PAGE===
+    endif
+    display_form --> if "Update Button is clicked" then
+        --> "Display form to update the user's info"
+        --> form_submitted
+    endif
+else
+    -r->[false] "Redirect to regular\ndashboard"
+    --> (*)
+endif
+
+===RELOAD_PAGE=== -u-> list_users
+
+@enduml

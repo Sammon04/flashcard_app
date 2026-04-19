@@ -1,0 +1,46 @@
+@startuml GameActivity
+title Game
+
+(*) --> "Fetch list of users"
+--> if "Fetch fails, or the current\nuser is the only one" then
+    -->[true] ===ERROR_MSG===
+else
+    -r>[false] "Remove currently logged in user from list"
+    --> "Shuffle list"
+    --> "Select a single user from the list without replacement" as start_question
+
+endif
+
+--> if "Image is invalid" then
+    -->[true] ===ERROR_MSG===
+else
+    -->[false] "Display selected user's image"
+
+endif
+
+--> "Fetch answers from 3\nother random users"
+--> if "Fetch fails or\nthere are\nfewer than 4 users" then
+    -->[true] ===ERROR_MSG===
+else
+    -->[false] "Display all questions and answers"
+endif
+
+"Display all questions and answers" --> if "Next/Skip button pressed" as skip_btn then
+    --> ===NEXT_QUESTION===
+endif
+
+"Display all questions and answers" -r-> if "Submit button pressed" then
+    -->"Display correct and\nincorrect answers"
+    --> "Add the # of correct answers to current score" as add_score
+    --> skip_btn
+    add_score -r-> if "No questions left" then
+        --> "Update database with score"
+        --> (*)
+    endif
+endif
+
+===ERROR_MSG=== --> "Print error message"
+-d> skip_btn
+===NEXT_QUESTION=== --> start_question
+
+@enduml
