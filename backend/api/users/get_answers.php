@@ -10,7 +10,7 @@ if ($id === null) {
 
 try {
 
-    $sql = "SELECT fname, lname, role, district, locale, wildcard 
+    $sql = "SELECT fname, lname, role, department, desk_num, wildcard 
             FROM user_info 
             WHERE info_user_id = ?";
 

@@ -10,8 +10,8 @@ $fname = $data['fname'] ?? null;
 $lname = $data['lname'] ?? null;
 $image = $data['image'] ?? null;
 $role = $data['role'] ?? null;
-$district = $data['district'] ?? null;
-$locale = $data['locale'] ?? null;
+$department = $data['department'] ?? null;
+$desk_num = $data['desk_num'] ?? null;
 $wildcard = $data['wildcard'] ?? null;
 
 if (empty($id) || empty($password) || empty($fname) || empty($lname)) {
@@ -28,13 +28,13 @@ try {
     VALUES (?, ?)";
 
     $sql2 = "INSERT INTO user_info 
-    (info_user_id, fname, lname, image, role, district, locale, wildcard) 
+    (info_user_id, fname, lname, image, role, department, desk_num, wildcard) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     $query1 = $db->prepare($sql1);
     $query1->bind_param("is", $id, $password);
     $query2 = $db->prepare($sql2);
-    $query2->bind_param("isssssss", $id, $fname, $lname, $image, $role, $district, $locale, $wildcard);
+    $query2->bind_param("isssssss", $id, $fname, $lname, $image, $role, $department, $desk_num, $wildcard);
 
     $query1->execute();
     $query2->execute();

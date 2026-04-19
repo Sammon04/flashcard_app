@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Session } from "../util/Session"
 import Question from './Question.jsx'
 
-const tags = ['fname', 'lname', 'role', 'district', 'locale', 'wildcard']
+const tags = ['fname', 'lname', 'role', 'department', 'desk_num', 'wildcard']
 const questionTexts = [
     'What is this person\'s first name?',
     'What is this person\'s last name?',
     'What is this person\'s role?',
-    'What is this person\'s district?',
+    'What is this person\'s department?',
     'What is this person\'s primary language?',
     'Which of these is an interesting fact about this person?',
 ]

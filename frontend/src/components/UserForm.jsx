@@ -7,8 +7,8 @@ function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
         fname: initialData.fname || "",
         lname: initialData.lname || "",
         role: initialData.role || "",
-        district: initialData.district || "",
-        locale: initialData.locale || "",
+        department: initialData.department || "",
+        desk_num: initialData.desk_num || "",
         wildcard: initialData.wildcard || "",
         image: initialData.image || "",
         password: ""
@@ -36,8 +36,8 @@ function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
             fname: "",
             lname: "",
             role: "",
-            district: "",
-            locale: "",
+            department: "",
+            desk_num: "",
             wildcard: "",
             image: "",
             password: ""
@@ -75,12 +75,12 @@ function UserForm({ onSubmit, initialData = {}, isEdit = false }) {
                     <input type="text" name="role" value={formData.role} onChange={handleChange}/>
                 </section>
                 <section>
-                    <label>District:</label>
-                    <input type="text" name="district" value={formData.district} onChange={handleChange}/>
+                    <label>department:</label>
+                    <input type="text" name="department" value={formData.department} onChange={handleChange}/>
                 </section>
                 <section>
-                    <label>Locale:</label>
-                    <input type="text" name="locale" value={formData.locale} onChange={handleChange}/>
+                    <label>desk_num:</label>
+                    <input type="text" name="desk_num" value={formData.desk_num} onChange={handleChange}/>
                 </section>
                 <section>
                     <label>Wildcard:</label>
