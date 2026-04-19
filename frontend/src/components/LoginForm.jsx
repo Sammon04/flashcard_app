@@ -17,7 +17,7 @@ function LoginForm({onLogin}) {
             </section>
             <section>
                 <label>Password:</label>
-                <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </section>
             <button type="submit">Login</button>
         </form>
