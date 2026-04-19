@@ -10,7 +10,7 @@ function LoginForm({onLogin}) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="from login-form">
+        <form onSubmit={handleSubmit} className="form login-form">
             <section>
                 <label>ID:</label>
                 <input type="text" value={id} onChange={(e) => setId(e.target.value)} required />
