@@ -83,6 +83,7 @@ function Dashboard() {
                 </div>
                 <main>
                     <button onClick={() => {window.location.href="/play"}}>Play!</button>
+                    <p>here there would be a tutorial on how to play</p>
                 </main>
                 <div className='rightColumn'>
                     <FakeAd/>
