@@ -14,7 +14,7 @@ if ($id === null || $score === null) {
 try {
 
     $sql = "UPDATE user 
-            SET score = score + ? 
+            SET score = ? 
             WHERE user_id = ?";
 
     $query = $db->prepare($sql);
