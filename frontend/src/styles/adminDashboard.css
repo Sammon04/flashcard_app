@@ -1,18 +1,18 @@
-.user-form {
+.create-form {
     margin: 10px;
 }
 
-.user-form input {
-    width: 60%;
+.create-form input {
+    min-width: 40%;
 
     margin-bottom: 5px;
 }
 
-.user-form label {
+.create-form label {
     width: 40%;
 }
 
-.user-form button {
+.create-form button {
     margin: 5px;
 }
 
@@ -20,4 +20,51 @@
     min-width: 60px;
 
     margin: 5px;
+}
+
+
+.edit-form, .password-form {
+    width: 60%;
+
+    margin: auto;
+}
+
+.edit-form input, .password-form input {
+    width: 70%;
+
+    margin-bottom: 5px;
+}
+
+.edit-form label, .password-form label {
+    width: 40%;
+}
+
+.edit-form button {
+    min-width: 60px;
+
+    margin: 5px;
+}
+
+/* ========================================================================== */
+
+@media only screen and (max-width: 1250px) {
+    .edit-form, .password-form {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 900px){
+
+    .create-form input {
+        min-width: 60%;
+    }
+
+    
+
+    .threeColumns>main table {
+        box-sizing: border-box;
+        overflow-x: scroll;
+        display: block;
+    }
 }

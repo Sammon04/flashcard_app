@@ -82,10 +82,12 @@ function Dashboard() {
                     <Leaderboard userScores={userScores}/>
                 </div>
                 <main>
-                    <button onClick={() => {window.location.href="/play"}}>Play the Full Quiz!</button>
-                    <button onClick={() => {
-                        window.location.href="/play?count=5"
-                    }}>Play a Short Quiz!</button>
+                    <div className='playButtons'>
+                        <button onClick={() => {window.location.href="/play"}}>Play the Full Quiz!</button>
+                        <button onClick={() => {
+                            window.location.href="/play?count=5"
+                        }}>Play a Short Quiz!</button>
+                    </div>
                     <p>here there would be a tutorial on how to play</p>
                 </main>
                 <div className='rightColumn'>

@@ -46,14 +46,14 @@ function ChangePassword({ user_id }) {
             {status.msg && (
                 <p className={(status.isError) ? "error-message" : "success-message"}>{status.msg}</p>
             )}
-            <form onSubmit={handleUpdatePassword}>
+            <form className="password-form" onSubmit={handleUpdatePassword}>
                 <section>
                     <label>Old Password:</label>
-                    <input type="text" name="old_password" value={passwords.old_password} onChange={handleChange} required/>
+                    <input type="password" name="old_password" value={passwords.old_password} onChange={handleChange} required/>
                 </section>
                 <section>
                     <label>New Password:</label>
-                    <input type="text" name="new_password" value={passwords.new_password} onChange={handleChange} required/>
+                    <input type="password" name="new_password" value={passwords.new_password} onChange={handleChange} required/>
                 </section>
                 <button type="submit" className="button btn-update-password">Update Password</button>
             </form>

@@ -3,3 +3,22 @@
 
     margin: 5px auto;
 }
+
+/* ========================================================================== */
+
+@media only screen and (max-width: 1250px) {
+    .login-form section{
+        width: 50%;
+
+        margin: 5px auto;
+    }
+}
+
+
+@media only screen and (max-width: 900px){
+    .login-form section{
+        width: 80%;
+
+        margin: 5px auto;
+    }
+}

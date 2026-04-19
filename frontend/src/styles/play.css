@@ -21,7 +21,6 @@
     display: block;
 
     margin: auto;
-    height: 60vh;
     border-radius: 100%;
     box-shadow: var(--shadow);
     transform-origin: top;
@@ -80,4 +79,21 @@
 
 .questionSet button {
     margin: 0px 5px;
+}
+
+/* ========================================================================== */
+
+@media only screen and (max-width: 1250px) {
+    .questionSet {
+        max-width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 900px){
+
+    .questionSet img {
+        width: 100%;
+    }
+    
 }
