@@ -3,7 +3,7 @@
     max-width: 80%;
 
     margin: auto;
-    padding-bottom: 10px;
+    padding-bottom: var(--medium-spacing);
     
     box-shadow: var(--shadow);
 
@@ -13,40 +13,45 @@
 
 .questionSet .imgDiv {
     background-color: var(--accent-color);
-    padding: 25px;
+
+    padding: var(--big-spacing);
 }
 
 .questionSet img {
+    margin: auto;
+
     object-fit: cover;
     display: block;
 
-    margin: auto;
     border-radius: 100%;
+
     box-shadow: var(--shadow);
 }
 
 .questionSet article {
-    padding: 10px;
     margin-bottom: 2px;
+    padding: var(--medium-spacing);
 }
 
 .questionSet article.correct {
-    border-left: 2px solid greenyellow;
     background-color: hsla(84, 100%, 50%, 0.246);
+
+    border-left: 2px solid greenyellow;
 }
 
 .questionSet article.incorrect {
-    border-left: 2px solid red;
     background-color: hsla(0, 100%, 50%, 0.188);
+
+    border-left: 2px solid red;
 }
 
 
 .questionSet h5 {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: var(--small-spacing);
+    margin-bottom: var(--small-spacing);
 
-    text-decoration: underline;
     font-size: large;
+    text-decoration: underline;
 }
 
 .questionSet .answerGrid {
@@ -57,6 +62,7 @@
 
 .questionSet button.selectedAnswer {
     background-color: var(--inverse-text-color);
+
     color: var(--text-color);
 }
 
@@ -73,7 +79,7 @@
 }
 
 .questionSet button {
-    margin: 0px 5px;
+    margin: 0px var(--small-spacing);
 }
 
 /* ========================================================================== */
@@ -84,23 +90,20 @@
     }
 }
 
-
 @media only screen and (max-width: 900px){
-
     .questionSet img {
         width: 100%;
     }
-    
 }
 
-.questionSet button:hover{
+/* ========================================================================== */
 
-    background-color: white;
+.questionSet button:hover{
+    background-color: var(--inverse-text-color);
 
     color: var(--text-color);
 }
 
 .incorrect button, .correct button {
-
     pointer-events: none;
 }

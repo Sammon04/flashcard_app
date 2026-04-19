@@ -1,5 +1,5 @@
 header {
-    padding: 5px;
+    padding: var(--small-spacing);
 
     background-color: var(--accent-color);
 
@@ -12,10 +12,6 @@ nav {
     justify-content: space-between;
 }
 
-header span {
-    margin-right: 10px;
-}
-
-header button {
-    margin-right: 10px;
+header span, header button {
+    margin-right: var(--medium-spacing);
 }

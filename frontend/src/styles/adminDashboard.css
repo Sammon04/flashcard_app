@@ -1,11 +1,11 @@
 .create-form {
-    margin: 10px;
+    margin: var(--medium-spacing);
 }
 
 .create-form input {
     min-width: 40%;
 
-    margin-bottom: 5px;
+    margin-bottom: var(--small-spacing);
 }
 
 .create-form label {
@@ -13,13 +13,13 @@
 }
 
 .create-form button {
-    margin: 5px;
+    margin: var(--small-spacing);
 }
 
-.user-list button {
+.user-list button, .edit-form button {
     min-width: 60px;
 
-    margin: 5px;
+    margin: var(--small-spacing);
 }
 
 
@@ -32,17 +32,11 @@
 .edit-form input, .password-form input {
     width: 70%;
 
-    margin-bottom: 5px;
+    margin-bottom: var(--small-spacing);
 }
 
 .edit-form label, .password-form label {
     width: 40%;
-}
-
-.edit-form button {
-    min-width: 60px;
-
-    margin: 5px;
 }
 
 /* ========================================================================== */
@@ -53,18 +47,15 @@
     }
 }
 
-
 @media only screen and (max-width: 900px){
-
     .create-form input {
         min-width: 60%;
     }
 
-    
-
     .threeColumns>main table {
         box-sizing: border-box;
-        overflow-x: scroll;
+        
         display: block;
+        overflow-x: scroll;
     }
 }

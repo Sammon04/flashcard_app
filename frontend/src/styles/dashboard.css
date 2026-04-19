@@ -7,19 +7,22 @@ table {
 }
 
 .playButtons button {
-    margin: 5px;
+    margin: var(--small-spacing);
+
+    font-size: larger;
 }
 
 .tutorial {
-    margin-top: 25px;
-    padding: 10px;
+    margin-top: var(--big-spacing);
+    padding: var(--medium-spacing);
 
     background-color: var(--secondary-color);
 
-    border: 2px solid var(--accent-color);
-    box-shadow: var(--shadow);
-
     text-align: left;
+
+    border: 2px solid var(--accent-color);
+
+    box-shadow: var(--shadow);
 }
 
 .tutorial h3 {
@@ -27,5 +30,5 @@ table {
 }
 
 .tutorial p {
-    margin-bottom: 5px;
+    margin-bottom: var(--small-spacing);
 }
