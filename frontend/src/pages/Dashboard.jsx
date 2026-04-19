@@ -75,8 +75,7 @@ function Dashboard() {
 
     return (
         <>
-            <Header user={curUser} />
-            <h1>Dashboard</h1>
+            <Header user={curUser} headerTitle={"Dashboard"}/>
             <div className="threeColumns">
                 <div className="leftColumn">
                     <Leaderboard userScores={userScores}/>

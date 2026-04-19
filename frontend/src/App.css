@@ -76,7 +76,8 @@ form section{
 }
 
 table {
-
+    width: 100%;
+    
     margin: auto auto auto auto;
 
     border-collapse: collapse;

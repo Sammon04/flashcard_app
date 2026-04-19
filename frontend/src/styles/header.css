@@ -1,11 +1,15 @@
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    padding: 5px;
 
     background-color: var(--accent-color);
 
     color: var(--inverse-text-color);
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 header span {

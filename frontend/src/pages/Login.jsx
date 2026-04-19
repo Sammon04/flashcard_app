@@ -53,7 +53,9 @@ function Login() {
 
     return (
         <>
-        <h1>Login With Your HR-Provided Credentials</h1>
+        <header>
+            <h1>Login With Your HR-Provided Credentials</h1>
+        </header>
         <main className='login-page'>
             {error && <p className='error-message'>{error}</p>}
             <LoginForm onLogin={handleLoginAttempt} />

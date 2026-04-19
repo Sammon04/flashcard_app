@@ -95,8 +95,7 @@ function AdminDashboard() {
 
     return (
         <>
-            <Header user={curUser} />
-            <h1>Admin Dashboard</h1>
+            <Header user={curUser} headerTitle={"Admin Dashboard"} />
             <div className="threeColumns">
                 <div className="leftColumn">
                     <UserForm onSubmit={handleCreateUser}/>
