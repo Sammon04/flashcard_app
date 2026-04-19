@@ -25,9 +25,9 @@ function Dashboard() {
                     
                     var userIn = false
 
-                    for (element in answerData){
-                        if (element[0] == curUser.user_id){
-                            userIn == true
+                    for (var i = 0; i < answerData.length; i++){
+                        if (answerData[i][0] == curUser.user_id){
+                            userIn = true
                             break
                         }
                     };
@@ -40,9 +40,10 @@ function Dashboard() {
                             }
                         )
 
-                        answerData.push(curUser.user_id, curUser.fname + " " + curUser.lname, curUser.score, true)
+                        answerData.push([curUser.user_id, curUser.fname + " " + curUser.lname, curUser.score, true])
 
                         setUserScores(answerData)
+                        console.log(answerData)
                         return
                     }
 
