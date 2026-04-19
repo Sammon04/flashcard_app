@@ -15,9 +15,9 @@ CREATE TABLE user_info (
     fname VARCHAR(30) NOT NULL,
     lname VARCHAR(30) NOT NULL,
     image VARCHAR(50),
-    role VARCHAR(30),
-    department VARCHAR(30),
-    location VARCHAR(20),
+    role VARCHAR(50),
+    department VARCHAR(50),
+    location VARCHAR(50),
     wildcard VARCHAR(100),
 
     CONSTRAINT fk_info_user_id
